@@ -58,7 +58,7 @@ namespace _10
         edit->inventory.remove_selection(); // Delete selected items
 
         // Adding/removing/moving other items to/from/in a container, or undoing/redoing such actions automatically syncs such changes to the selection
-        // Use selections when selecting something is "meaningful" for your application, e.g. selecting a bunch of items for bulk purchase/summing values
+        // Use selections when "selecting" something is meaningful for your application, e.g. selecting a bunch of items for bulk purchase/summing values
         // nf's selections are sometimes cheaper (in runtime/hist size) and ~always easier than floating your own (and manually syncing changes/undos/redos)
     }
 

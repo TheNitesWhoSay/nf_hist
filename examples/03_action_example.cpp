@@ -18,10 +18,7 @@ namespace _03
     // Usually you want to create a tracked version of your structure by extending nf::tracked<SOURCE_DATA_TYPE, TRACKED_TYPE>
     struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
     {
-        Tracked_npc() : tracked(this) // Pass your "this" pointer to nf::tracked (allows nf_hist to call notification methods, covered later)
-        {
-            init_data(Npc{.name = "unknown", .hitpoints = 0});
-        } 
+        Tracked_npc() : tracked(this) {} // Pass your "this" pointer to nf::tracked (allows nf_hist to call notification methods, covered later) 
 
         void generate_character() // Now you can add methods to your tracked type
         {
@@ -40,8 +37,8 @@ namespace _03
         npc.generate_character();
         npc.generate_character();
         npc.print_change_history(std::cout);
-        // Note that you're now adding a single action to the change history for every call to generateCharacter
-        // And the two data change events involved in generateCharacter get added under that same action
+        // Note that you're now adding a single action to the change history for every call to generate_character
+        // And the two data change events involved in generate_character get added under one action
         // This saves a little time & space over having separate actions for ever data change
         // And as we'll see in the future, this also makes them a single, undoable, label-able unit of work
     }

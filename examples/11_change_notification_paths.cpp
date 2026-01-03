@@ -31,15 +31,15 @@ namespace _11
         using hitpoints_path = NF_PATH(root->hitpoints);
         using inventory_path = NF_PATH(root->inventory);
 
-        // Paths can go down levels further levels, when you pass through arrays/collections you put an index
-        // What index you use doesn't matter, it's just syntactically representative of an array access operator
+        // Paths can go down further levels, when you pass through arrays/collections you put an index
+        // What index you use to make a path doesn't matter, it's just syntactically representative of an array access operator
         using item_value_path = NF_PATH(root->inventory[0].value);
 
         // NF_PATH is an easier/more preferred way of writing nf::make_path
         using same_item_value_path = nf::make_path<decltype(root->inventory[0].value)>;
 
         // Paths are used primarily to receive change notifications, e.g.
-        void element_added(inventory_path, std::size_t index) // nf can sense and call this method automatically (it's NOT using polymorphism)
+        void element_added(inventory_path, std::size_t index) // nf can sense and call this method automatically (while avoiding polymorphism)
         {
             std::cout << "item added to inventory: " << Json::out(read.inventory[index]) << '\n';
         }

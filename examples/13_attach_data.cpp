@@ -38,7 +38,7 @@ namespace _13
         int hitpoints = 50;
 
         // You can use annotations (described in RareCpp's documentation) to indicate (at compile time) that you want this field treated somehow differently
-        NOTE(inventory, nf::attach_data<std::unique_ptr<Item_rendering>>) // Attach_data instructs nf to maintain a parallel array - std::vector<Item_rendering> to inventory
+        NOTE(inventory, nf::attach_data<std::unique_ptr<Item_rendering>>) // Attach_data instructs nf to maintain a parallel array of type, to inventory
         std::vector<Item> inventory {};
 
         REFLECT(Npc, name, hitpoints, inventory)

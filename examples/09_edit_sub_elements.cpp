@@ -60,7 +60,7 @@ namespace _09
         assert(npc->inventory[0].label == "Willow Bow");
 
         // However, writing out the full path from your data root and making changes to individual fields is not always reasonable
-        // When data gets complicated enough being able to grab one non-const element and use mutator methods is essential
+        // When data gets complicated enough, being able to grab one non-const element, maybe pass it around, and use mutator methods is essential
         // This is the use-case for nf::sub_elements
         auto bow = npc.edit_item(0);
         auto arrows = npc.edit_item(1);

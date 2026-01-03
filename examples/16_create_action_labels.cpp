@@ -89,7 +89,7 @@ namespace _16
             switch ( descr ) // Derive the label from the descriptor associated with the action
             {
                 case Descriptor::pickup_item: std::cout << "Picked up item\n"; break;
-                case Descriptor::recieve_trade_item: std::cout << "Recieved item\n"; break;
+                case Descriptor::recieve_trade_item: std::cout << "Received item\n"; break;
                 case Descriptor::drop_item: std::cout << "Dropped item\n"; break;
                 case Descriptor::burn_damage_tick: std::cout << "Burn damage\n"; break;
                 case Descriptor::poison_damage_tick: std::cout << "Poison damage\n"; break;
@@ -108,7 +108,7 @@ namespace _16
     void create_action_labels()
     {
         // By default, hist can provide you a very nice technical rendering of what changed in an action
-        // But that is very different from providing a user-friendly description (/"label") for an action, which you can do with attached data
+        // But that is very different from providing a user-friendly description (/"label") for an action, which you can do with action user data
         Tracked_npc npc {};
         npc.pickup_item(Item{.label = "Bones", .value = 0.5f});
         npc.recieve_trade_item(Item{.label = "Sword", .value = 50.0f});

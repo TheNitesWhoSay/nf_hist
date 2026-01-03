@@ -22,7 +22,7 @@ namespace _06
 
         npc.print_change_history(std::cout); // Tracked initializations remember the initial value in the change history
         // this isn't always necessary, e.g. live undo-redos will work fine without
-        // but may be needed for something like data-history replays to start at the correct value after code-changes have occured
+        // but may be needed for something like data-history replays to start at the correct value after code-changes have occurred
     }
 
 }

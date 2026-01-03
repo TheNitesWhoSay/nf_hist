@@ -23,7 +23,7 @@ namespace _18 { void cap_history_size(); }
 
 /*
     - 01 Create a tracked type and read from it
-    - 02 Write changed to a tracked type & print change history
+    - 02 Write changes to a tracked type & print change history
     - 03 Write changes to a tracked type using an action method
     - 04 Leverage default initialization
     - 05 Perform an untracked initialization

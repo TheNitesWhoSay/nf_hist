@@ -35,7 +35,7 @@ namespace _04
     {
         Tracked_item() : tracked(this)
         {
-            // Before running actions you can instruct hist to remember inline/ctor initialization (or *gasp* undefined initial state) if you have a need to
+            // Before running actions you can instruct hist to remember inline/ctor initialization (or *gasp* undefined initial state) if needed
             record_init(); // e.g. to ensure replays are valid even if initializers have changed in the code
         }
     };
@@ -47,7 +47,7 @@ namespace _04
             npc.total_actions() == 0); // Using inline initializers is untracked
         std::cout << Json::out(*npc) << '\n';
 
-        Tracked_item item {}; // Source data is initialized via ctor (untracked)
+        Tracked_item item {}; // Source data is initialized via ctor
         assert(item->label == "Sword" && item->damage == 12 && item->hitcount == 0 && // Source data is initialized via ctor
             item.total_actions() == 1); // Using ctor for initialization is untracked (but Tracked_items ctor explicitly calls "record_init")
         std::cout << Json::out(*item) << '\n';

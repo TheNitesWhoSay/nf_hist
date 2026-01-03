@@ -58,10 +58,10 @@ namespace _17
         npc()->inventory[1].value *= 0.75f;
 
         npc.print_change_history(std::cout);
-        // If you peer into the bytes, you'll see that 8 bytes (or maybe 4 or something depending on your system/compilation settings)
+        // If you peer into the bytes, you'll see that 8 bytes (or maybe 4/otherwise depending on your system/compilation settings)
         // Are being used to store the indexes [0] and [1] used in the actions above
-        // This can add up to a lot, if you know there is some maximum amount of items the inventory can hold (like 100)...
-        // Then this is unnecessary and you could easily get by with a smaller index (supplied in the NOTE on inventory using nf::index_size)
+        // This can add up to a lot, and unnecessarily if you know there is some maximum amount of items the inventory can hold (like 100)...
+        // When that's the case you can use a smaller index (supplied in the NOTE on inventory using nf::index_size)
         std::cout << "Total size: " << sum_history_size(npc) << "\n\n";
 
         auto optimized_npc = nf::make_tracked<OptimizedNpc>(OptimizedNpc{.inventory {

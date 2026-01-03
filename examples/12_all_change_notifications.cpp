@@ -28,8 +28,8 @@ namespace _12
 
         // Hist uses the C.A.R.M.S. data change notifications - change, add, remove, move and sel update; separately there is the after_action notification
         //   add, remove, and move notifications apply to container-mutating operations, while change applies to set operations
-        //   including changing regular fields as well as elements within containers
-        // You opt into a notification simply by adding the appropriate method, these methods have the signature and are made specific to fields using paths
+        //   including changing regular fields, as well as elements within containers
+        // Opt into a notification simply by adding the appropriate method, these methods have specific signatures and are made specific to fields using paths
         
         // void value_changed(PATH, OLD_VALUE, NEW_VALUE);
         // void element_added(PATH, INDEX);

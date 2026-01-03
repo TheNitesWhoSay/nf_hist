@@ -37,8 +37,8 @@ namespace _18
             render_action(index, action, false);
             running_byte_count += action.byte_count;
             if ( running_byte_count > max_hist_bytes ) // If it exceeds your size limit
-                running_byte_count = trim_history_to_size(max_hist_bytes*4/5); // Trim it to a smaller size (use a ratio so as not to run this after *every* action)
-            else if ( total_actions() > max_action_count ) // If it exceeds your acount count limit
+                running_byte_count = trim_history_to_size(max_hist_bytes*4/5); // Trim it to a smaller size (use a ratio to not run this after *every* action)
+            else if ( total_actions() > max_action_count ) // If it exceeds your action count limit
             {
                 trim_history(max_action_count/5); // Trim to a smaller action count
                 running_byte_count = 0;
@@ -51,7 +51,7 @@ namespace _18
                 }
             }
 
-            // Trimming will remove your earliest actions first and will removed elided actions in blocks
+            // Trimming will remove your earliest actions first and will always remove elided actions in blocks
         }
     };
 
