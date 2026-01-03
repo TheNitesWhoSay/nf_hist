@@ -13,18 +13,18 @@ namespace _11
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 0;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc> // Note: passing Tracked_npc allows nf to perform a compile-time check for methods like value_changed
+    struct Npc : nf::tracked<Npc_data, Npc> // Note: passing Npc allows nf to perform a compile-time check for methods like value_changed
     {
-        Tracked_npc() : tracked(this) {} // Note: passing this allows nf to call member methods on this without polymorphism
+        Npc() : tracked(this) {} // Note: passing this allows nf to call member methods on this without polymorphism
         
         // You can create a representation of the path from the "root" of your data to some field using NF_PATH (auto-complete friendly)
         using name_path = NF_PATH(root->name);
@@ -53,7 +53,7 @@ namespace _11
 
     void change_notification_paths()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         npc()->inventory.append(Item{.label = "Sword", .value = 40.0f});
         npc()->inventory.append(Item{.label = "Axe", .value = 31.5f});
 

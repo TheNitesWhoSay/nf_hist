@@ -32,7 +32,7 @@ namespace _13
         REFLECT(Item_rendering, frame, x_offset, y_offset, texture)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 50;
@@ -41,12 +41,12 @@ namespace _13
         NOTE(inventory, nf::attach_data<std::unique_ptr<Item_rendering>>) // Attach_data instructs nf to maintain a parallel array of type, to inventory
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         void element_added(NF_PATH(root->inventory), std::size_t index)
         {
@@ -63,7 +63,7 @@ namespace _13
     
     void attach_data()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         auto edit = npc.create_action();
         edit->inventory.append(Item{.label = "Sword"});
         edit->inventory.append(Item{.label = "Bow"});

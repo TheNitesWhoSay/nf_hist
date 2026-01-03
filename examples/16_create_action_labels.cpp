@@ -31,18 +31,18 @@ namespace _16
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 50;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc, Action_descriptor>
+    struct Npc : nf::tracked<Npc_data, Npc, Action_descriptor>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         void pickup_item(const Item & item)
         {
@@ -109,7 +109,7 @@ namespace _16
     {
         // By default, hist can provide you a very nice technical rendering of what changed in an action
         // But that is very different from providing a user-friendly description (/"label") for an action, which you can do with action user data
-        Tracked_npc npc {};
+        Npc npc {};
         npc.pickup_item(Item{.label = "Bones", .value = 0.5f});
         npc.recieve_trade_item(Item{.label = "Sword", .value = 50.0f});
         npc.drop_item(0);

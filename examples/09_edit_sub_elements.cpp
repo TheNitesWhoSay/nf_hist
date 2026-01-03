@@ -13,18 +13,18 @@ namespace _09
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 0;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         // If you need mutable, non-const sub-elements from your root data...
         struct Edit_item : nf::tracked_element<Item, NF_PATH(root->inventory[0])> // Create a type representing a sub-element of your data
@@ -46,8 +46,8 @@ namespace _09
     
     void edit_sub_elements()
     {
-        Tracked_npc npc {};
-        npc.init_data(Npc{.name = "Shopkeeper", .hitpoints = 99, .inventory {
+        Npc npc {};
+        npc.init_data(Npc_data{.name = "Shopkeeper", .hitpoints = 99, .inventory {
             Item { .label = "Bow", .value = 40.0f },
             Item { .label = "Arrows x50", .value = 10.0f }
         }});

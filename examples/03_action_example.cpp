@@ -7,18 +7,18 @@
 namespace _03
 {
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 0;
 
-        REFLECT(Npc, name, hitpoints)
+        REFLECT(Npc_data, name, hitpoints)
     };
 
     // Usually you want to create a tracked version of your structure by extending nf::tracked<SOURCE_DATA_TYPE, TRACKED_TYPE>
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {} // Pass your "this" pointer to nf::tracked (allows nf_hist to call notification methods, covered later) 
+        Npc() : tracked(this) {} // Pass your "this" pointer to nf::tracked (allows nf_hist to call notification methods, covered later) 
 
         void generate_character() // Now you can add methods to your tracked type
         {
@@ -33,7 +33,7 @@ namespace _03
 
     void action_example()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         npc.generate_character();
         npc.generate_character();
         npc.print_change_history(std::cout);

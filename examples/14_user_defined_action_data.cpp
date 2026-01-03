@@ -13,13 +13,13 @@ namespace _14
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 50;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
     struct Notes // Define some data structure you want attached to each action
@@ -29,9 +29,9 @@ namespace _14
         bool operator==(const Notes & other) const { return value == other.value; } // Need an operator== overload if your type doesn't automatically have one
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc, Notes> // Provide this data structure as the third template argument to nf::tracked
+    struct Npc : nf::tracked<Npc_data, Npc, Notes> // Provide this data structure as the third template argument to nf::tracked
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         void hit(int damage, std::string source)
         {
@@ -42,7 +42,7 @@ namespace _14
 
     void user_defined_action_data()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         npc.hit(12, "burn");
         npc.hit(20, "poison");
         

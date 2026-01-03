@@ -6,18 +6,18 @@
 namespace _08
 {
     
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 0;
         int mana = 0;
 
-        REFLECT(Npc, name, hitpoints, mana)
+        REFLECT(Npc_data, name, hitpoints, mana)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         void full_restore()
         {
@@ -34,7 +34,7 @@ namespace _08
 
     void redo_elision()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         npc.full_restore(); // 100
         npc.hit(5); // 95
         npc.hit(4); // 91

@@ -13,18 +13,18 @@ namespace _12
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 50;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         // Hist uses the C.A.R.M.S. data change notifications - change, add, remove, move and sel update; separately there is the after_action notification
         //   add, remove, and move notifications apply to container-mutating operations, while change applies to set operations
@@ -89,8 +89,8 @@ namespace _12
 
     void all_change_notifications()
     {
-        Tracked_npc npc {};
-        npc.init_data(Npc{});
+        Npc npc {};
+        npc.init_data(Npc_data{});
 
         npc()->hitpoints -= 20;
         npc()->inventory.append(Item{.label = "Bow", .value = 40.0f});

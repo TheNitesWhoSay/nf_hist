@@ -13,24 +13,24 @@ namespace _10
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 0;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
     };
 
     void using_selections()
     {
-        Tracked_npc npc {};
-        npc.init_data(Npc{.inventory {
+        Npc npc {};
+        npc.init_data(Npc_data{.inventory {
             Item { .label = "Bow", .value = 40.0f },
             Item { .label = "Arrows x50", .value = 10.0f },
             Item { .label = "Sword", .value = 50.0f }

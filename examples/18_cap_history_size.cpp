@@ -14,18 +14,18 @@ namespace _18
         REFLECT(Item, label, value)
     };
 
-    struct Npc
+    struct Npc_data
     {
         std::string name = "";
         int hitpoints = 50;
         std::vector<Item> inventory {};
 
-        REFLECT(Npc, name, hitpoints, inventory)
+        REFLECT(Npc_data, name, hitpoints, inventory)
     };
 
-    struct Tracked_npc : nf::tracked<Npc, Tracked_npc>
+    struct Npc : nf::tracked<Npc_data, Npc>
     {
-        Tracked_npc() : tracked(this) {}
+        Npc() : tracked(this) {}
 
         std::size_t max_action_count = 10;
         std::size_t max_hist_bytes = 300;
@@ -57,7 +57,7 @@ namespace _18
 
     void cap_history_size()
     {
-        Tracked_npc npc {};
+        Npc npc {};
         npc()->hitpoints += 1;
         npc()->hitpoints += 1;
         npc()->hitpoints += 1;
