@@ -1,0 +1,28 @@
+
+Motivating Examples:
+    - https://godbolt.org/z/jToKajWoY - Change data, undo, redo & print change history
+    - https://godbolt.org/z/zTa6dqrjr - Data change listener
+    - (TODO) short gif/webp of GUI-based usage example (Chkdraft)
+
+Core Examples / Learn By Example:
+    01.) https://godbolt.org/z/858zs8WGY - Create a tracked type and read from it
+    02.) https://godbolt.org/z/4oMEGjM4c - Write changes to a tracked type & print change history
+    03.) https://godbolt.org/z/KWj5hMa44 - Write changes to a tracked type using an action method
+    04.) https://godbolt.org/z/b9qarjfKa - Leverage default initialization
+    05.) https://godbolt.org/z/b9qarjfKa - Perform an untracked initialization
+    06.) https://godbolt.org/z/q3E8Gv7qx - Perform a tracked initialization
+    07.) https://godbolt.org/z/cz9x8hfvP - Undo & redo actions
+    08.) https://godbolt.org/z/bq7cazzKd - Redo elision
+    09.) https://godbolt.org/z/e6vbqqnbh - Editing sub-elements
+    10.) https://godbolt.org/z/j3fPjEsnP - Using selections
+    11.) https://godbolt.org/z/fWzsG83eh - Simple path & change notifications
+    12.) https://godbolt.org/z/j5qh1zvMd - All change notifications
+    13.) https://godbolt.org/z/n8jTbYKWM - Attach vector parallel to source data
+    14.) https://godbolt.org/z/4ex61hqjn - Add data to actions
+    15.) https://godbolt.org/z/555j7Kr4b - Render actions
+    16.) https://godbolt.org/z/8jznvc5Y7 - Create user-friendly action labels
+    17.) https://godbolt.org/z/rooz4GxW3 - Optimize history size
+    18.) https://godbolt.org/z/snnWdbKcs - Cap history size
+
+Production usage example (Chkdraft):
+    - Must point out all the different elements of hist where they're being used in the code and how they effect the GUI output/behavior
