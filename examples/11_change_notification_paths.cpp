@@ -44,7 +44,7 @@ namespace _11
             std::cout << "item added to inventory: " << Json::out(read.inventory[index]) << '\n';
         }
 
-        void value_changed(item_value_path path, const float & old_value, const float & new_value)
+        void value_changed(item_value_path path, float old_value, float new_value)
         {
             auto inventory_index = path.index<0>(); // If your path passes through arrays/collections you can get the index used from path
             std::cout << "inventory[" << inventory_index << "].value changed from " << old_value << " to " << new_value << '\n';
