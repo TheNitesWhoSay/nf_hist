@@ -9,7 +9,7 @@ Core Examples / Learn By Example:
     02.) https://godbolt.org/z/4oMEGjM4c - Write changes to a tracked type & print change history
     03.) https://godbolt.org/z/KWj5hMa44 - Write changes to a tracked type using an action method
     04.) https://godbolt.org/z/b9qarjfKa - Leverage default initialization
-    05.) https://godbolt.org/z/b9qarjfKa - Perform an untracked initialization
+    05.) https://godbolt.org/z/EcMc13MhT - Perform an untracked initialization
     06.) https://godbolt.org/z/q3E8Gv7qx - Perform a tracked initialization
     07.) https://godbolt.org/z/cz9x8hfvP - Undo & redo actions
     08.) https://godbolt.org/z/bq7cazzKd - Redo elision
