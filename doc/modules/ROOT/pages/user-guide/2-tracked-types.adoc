@@ -4,7 +4,7 @@
 
 
 
-The first step to using hist is creating your data class (note that this documentation may use "class" and "struct" interchangably). At present hist supports:
+The first step to using hist is creating your data class (note that this documentation may use "class" and "struct" interchangably); at present hist supports:
 
 * https://en.cppreference.com/w/cpp/language/types.html[Fundamental types] (e.g. int, float, char, std::uint8_t)
 * C arrays
