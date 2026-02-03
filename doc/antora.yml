@@ -1,0 +1,6 @@
+name: nf-hist
+version: ~
+title: Nf Hist
+nav:
+- modules/ROOT/nav.adoc
+- modules/api/nav.adoc

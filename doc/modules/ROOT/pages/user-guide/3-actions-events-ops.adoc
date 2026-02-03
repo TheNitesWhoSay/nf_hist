@@ -1,0 +1,136 @@
+= Actions, Events & Operations
+
+== Terminology
+
+* A *Command/Intent*: can broadly be thought of as a request for action - the hist library does not concern itself with commands (or intents) at this time, rather, hist is a record of actions.
+* An *Action*: represents some action your program is taking. Actions can range from a high-level API call with thousands of branches and data changes, or could be as simple as incrementing an int. An action consists of zero or more data-change events. Generating a single action is the ideal response to a single user/client command.
+* A *Data-Change Event* (or just *Event*): is a change to a particular field or sub-field in your tracked object. Events consist of a *Path* to the field/sub-field that changed, and an *Operation/Op* that occurs on that field/sub-field.
+* An *Op/Operation*: is a specific transformation performed on an object/field/sub-field, e.g. if you go ``edit.my_int = 5;`` that's an assignment op, ``edit.my_int_vec.append(12)`` that's an append op, each op has a spec for how it can be recorded as binary data in hist.
+
+== Action Methods
+
+The preferred way to edit tracked data is with "Action Methods" - just add a method to your class, put the line ``auto edit = create_action();`` somewhere in your method, and change your data via edit.
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+    
+    void generate_character()
+    {
+        auto edit = create_action();
+        edit->name = "jj";
+        edit->hitpoints = rand()%100+1;
+        assert(read.name == "jj" && read.hitpoints > 0);
+    }
+
+    void hit()
+    {
+        create_action()->hitpoints -= 20;
+    }
+};
+----
+
+Then you can simply these actions methods on an instance of Npc, e.g.
+[,cpp]
+----
+Npc npc {};
+npc.generate_character();
+npc.hit();
+
+npc.print_change_history(std::cout);
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/GEoehs59s,window=read-later,align="left"]
+
+The method ``print_change_history`` will give you a readout of the actions and events hist has stored - including the bytes of the individual events and code representing the value operated on and the operation that occured. This is good for debugging and understanding what the library is doing, but inadvisable for direct use in release code.
+
+----
+Action[0] contains events [0, 2)
+  [ 0,  1,20] 10 80 02 00 00 00 00 00 00 00 6A 6A 00 00 00 00 00 00 00 00  // edit.name = "jj" // ""
+  [ 1, 21,10] 10 81 2A 00 00 00 00 00 00 00  // edit.hitpoints = 42 // 0
+
+Action[1] contains events [2, 3)
+  [ 2, 31,10] 10 81 16 00 00 00 2A 00 00 00  // edit.hitpoints = 22 // 42
+----
+
+While the data changes happen instantly, actions are only submitted to the change history (become available for browsing/undo/redo) once all actions have gone out of scope, you usually want actions submitted ASAP so be a little cautious if you choose to create actions outside of actions methods.
+
+== Persistent Actions
+
+Persisent actions are sometimes required, for instance, in a paint program you might select a brush and then click and hold - move around for a bit - then release, and you want the entire brush sequence to be stored as one undoable action. These are more complicated...
+
+The general recommendation is to store something like ``std::optional<nf::editor<nf::tracked>> brush;`` create your brush action with ``brush.emplace(create_action())``, then destroy it with ``brush = std::nullopt`` on mouse-up or other aborting actions.
+
+[,cpp]
+----
+struct App
+{
+    Canvas canvas {};
+    std::optional<nf::editor<nf::tracked<Canvas_data, Canvas>>> brush = std::nullopt;
+
+    void destroy_brush()
+    {
+        brush = std::nullopt;
+    }
+
+    void on_mouse_down(int x, int y)
+    {
+        destroy_brush();
+        brush.emplace(canvas.create_action());
+        canvas.place_dot(x, y);
+    }
+
+    void on_mouse_move(int x, int y)
+    {
+        canvas.place_dot(x, y);
+    }
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/YzsqM8fnx,window=read-later,align="left"]
+
+The advantage of persistent/brush actions is that a sequence of events, which may have some delay between them, can all be stored as a singular undoable/redoable action.
+
+Note that in this example ``create_action`` was called multiple times but only a single action was created... Whenever one action is already pending (created, but not yet out of scope), further calls to create_action just reference the same pending action.
+
+== Ops
+
+*Primitives* are given the ops ``=, +=, -=, *=, /=, %=, ^=, &=, and |=``.
+
+*Arrays* (not their elements which are primitives) just have ``.reset()`` and xref:user-guide/7-selections.adoc[]
+
+*std::optional* has ``=, and ->``.
+
+*std::vector* is where things get interesting, it has ``operator=`` but the details of what changed would be opaque, and the overhead of storing before and after states for the whole vector would be murder; so a suite of vector-specific operations exist:
+
+* reset()
+* reserve()
+* trim()
+* assign_default(size)
+* assign(size, value)
+* operator=(value)
+* set(indexes, value)
+* append(value), append(values)
+* insert(index, value), insert(index, values)
+* remove(index), remove(indexes)
+* sort()
+* sort_desc()
+* swap(l, r)
+* move_up(index), move_up(indexes)
+* move_top(index), move_top(indexes)
+* move_down(index), move_down(indexes)
+* move_bottom(index), move_bottom(indexes)
+* move_to(from_index, to_index)
+* (additional ops for selections)
+
+== Performance Notes
+
+Keep in mind that hist is serializing data in-memory to remember every op, using hist is _not_ going to be as fast as performing the same operations with no history recorded. It is, however, likely to win in comparison to hand-rolled undo-redo code. This is because hist has the following qualities...
+
+* Actions/events/ops *do _not_ rely on type erasure or polymorphism* (leverages *reflection* and *TMP*).
+* Actions/events are individually *non-allocating* -- underlying vectors only rarely need to expand.
+* Ops each have a binary spec tailored to store the *minimum data necessary* for fast undos & redos.
+* Ops use *efficient algorithms*, e.g. bulk moves use https://en.cppreference.com/w/cpp/algorithm/rotate.html[std::rotate] and not removal/re-insertions.
+* Ops have separate do-redo code, such that do can occur without reading the data it just serialized and can take max advantage of info uniquely available to it (and not to undo-redo) at compile time.
+* Do-code stores what is needed to remember the change, makes the change directly, then returns immediately - additional features like notifications or attachments are strictly *pay-for-what-you-use*.
+* Hist storage is append-only, allowing it to live in hotter caches and be re-streamed in parallel.

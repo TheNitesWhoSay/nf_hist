@@ -1,0 +1,69 @@
+= History & Undo-Redo
+
+When you call an op, the "do" code for the op runs, actual data changes and event creation (and selection updates, notifications, and attachment updates if applicable) all occur before the op returns. Event creation includes serializing the "path" to the field/sub-field/sub-element being edited and serializing the op/data-change into memory. When all pending actions have gone out of scope, only then is an action submitted & available for undo-redos and rendering.
+
+[,cpp]
+----
+void poison_damage()
+{
+    auto edit = create_action(); // count 1 -> 2
+    edit->hitpoints -= 1; // event 1 is created, hitpoints decrements
+    // ~edit(): count 2 -> 1
+}
+
+void tick() // npc.tick() is called
+{
+    auto edit = create_action(); // pending action count 0 -> 1
+    edit->mana += 1; // event 0 is created, mana increments
+    poison_damage();
+    // ~edit(): count 1 -> 0, so the pending action is submitted
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/c65xaz5KP,window=read-later,align="left"]
+
+== Undo
+
+Calling ``undo_action()`` finds the next action to be undone, and goes through the data-change events in reverse order - invoking the undo code for the given op in each event on the data at said events path.
+
+[,cpp]
+----
+npc.tick(); // first mana is incremented, then hitpoints is decremented
+assert(npc->hitpoints == 99 && npc->mana == 1);
+
+npc.undo_action(); // first hitpoints is incremented, then mana is decremented
+assert(npc->hitpoints == 100 && npc->mana == 0);
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/1qGaM6aqc,window=read-later,align="left"]
+
+== Redo
+
+When you undo an action, that action becomes available for redo. Calling ``redo_action()`` finds the most recent undone action, and goes through the data-change events in forward order - invoking the redo code for the given op on the data at said events path.
+
+[,cpp]
+----
+npc.tick(); // first mana is incremented, then hitpoints is decremented
+assert(npc->hitpoints == 99 && npc->mana == 1);
+
+npc.undo_action(); // first hitpoints is incremented, then mana is decremented
+assert(npc->hitpoints == 100 && npc->mana == 0);
+
+npc.redo_action(); // first mana is incremented, then hitpoints is decremented
+assert(npc->hitpoints == 100 && npc->mana == 0);
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/3WsfbT1Yc,window=read-later,align="left"]
+
+== Redo Elision
+
+When you undo an action, then perform a new action without exausting all your redos, your redos are "elided" - they still exist as part of your history - but they're no longer available via individual calls to undo or redo. A replay/data-recovery operation does not necessarily require visiting elided redos, though an active stream of change history should visit & include all of these.
+
+[,cpp]
+----
+npc.poison_damage(); // hitpoints 100 -> 99
+npc.undo_action(); // one redo available
+npc.poison_damage(); // new action occured, so existing redos are elided!
+
+assert(npc->hitpoints == 99);
+npc.redo_action(); // No redos are available
+assert(npc->hitpoints == 99); // so no change
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/Thz7eMqjP,window=read-later,align="left"]

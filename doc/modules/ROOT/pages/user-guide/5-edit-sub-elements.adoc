@@ -1,0 +1,107 @@
+= Edit Sub-Elements
+
+== Primer
+
+[,cpp]
+----
+struct Item {
+    std::string label = "";
+    float value = 0.0f;
+};
+
+struct Npc_data {
+    std::string name = "";
+    int hitpoints = 0;
+    std::vector<Item> inventory {};
+};
+
+REFLECT_PRIVATE(Item, label, value)
+REFLECT_PRIVATE(Npc_data, name, hitpoints, inventory)
+----
+
+When you have more complex source data, it remains easy to read and get const references to elements from further down. image:godbolt_run.svg[Run,link=https://godbolt.org/z/W46GqrqxY,window=read-later,align="left"]
+
+[,cpp]
+----
+Npc npc {};
+npc.init_data(Npc_data{.name = "Shopkeeper", .hitpoints = 99, .inventory {
+    Item { .label = "Bow", .value = 40.0f },
+    Item { .label = "Arrows x50", .value = 10.0f }
+}});
+assert(npc->inventory[0].label == "Bow");
+----
+
+It's also not difficult to write to _individual_ fields further down. image:godbolt_run.svg[Run,link=https://godbolt.org/z/rGfdPMY5x,window=read-later,align="left"]
+
+[,cpp]
+----
+npc()->inventory[0].label = "Willow Bow";
+assert(npc->inventory[0].label == "Willow Bow");
+----
+
+However, if you wish to to return _mutable_ sub-elements, especially those with non-const methods, and track the changes to them... this is more difficult. You can copy the whole element, then replace the whole element, e.g.
+
+[,cpp]
+----
+Item item = npc->inventory[0];
+item.label += "*";
+item.value /= 2;
+npc()->inventory[0] = item;
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/afrrhT9ME,window=read-later,align="left"]
+
+And this can work, especially when your sub-object is small, but now rather than hist recording and serializing your particular data changes, hist can only see that you replaced the whole sub-object - and will have to use the memory/storage to store that objects before and after state rather than that of the individual field changes.
+
+If you wish to skip that overhead, or you want the fine-details of which fields are being altered, or want more control over action labeling, then we need a new tool...
+
+== Tracked Elements
+
+A tracked element is a _mutable_ representation of a sub-object that exists somewhere relative to the root of your data; a tracked element can be returned from methods in tracked classes and can have non-const methods which mutate the data of that sub-object.
+
+Tracked elements should be written as https://en.cppreference.com/w/cpp/language/nested_classes.html[nested classes] in your tracked class; they should extend nf::tracked_element<SUB_OBJECT_TYPE, NF_PATH(root->path_to_sub_object)>, and use the tracked_element constructors e.g.
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+
+    struct Edit_item : nf::tracked_element<Item, NF_PATH(root->inventory[0])>
+    {
+        using tracked_element::tracked_element;
+    };
+};
+----
+
+== Usage
+
+Now we can add a ``decrease_value`` method to perform some tracked mutations to item, and a method to get this editable item from an npc...
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+
+    struct Edit_item : nf::tracked_element<Item, NF_PATH(root->inventory[0])>
+    {
+        using tracked_element::tracked_element;
+
+        void decrease_value(float percentage)
+        {
+            edit.label += "*";
+            edit.value -= read.value * percentage;
+        }
+    };
+
+    Edit_item edit_item(std::size_t index)
+    {
+        return Edit_item(this, view.inventory[index]);
+    }
+};
+----
+image::godbolt_example.svg[Run,link=https://godbolt.org/z/1qfM7f1sr,window=read-later,align="left"]
+
+As seen in the above example... the values ``read`` and ``edit`` are members of ``tracked_element`` and can be used to respectively read values from, and make changes to the members of ``Item``.
+
+Additionally make note of ``root`` and ``view`` which are both members of tracked; root is used to make paths (which identify a field but don't know the keys/array indexes to get there) while view is used to make routes (a path together with the keys/array indexes and thus identify a particular instance of a field); these will be gone over in greater detail in the next section.

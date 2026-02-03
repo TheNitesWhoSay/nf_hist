@@ -1,0 +1,98 @@
+= Tracked Types
+
+== 1.) Create a source data class
+
+
+
+The first step to using hist is creating your data class (note that this documentation may use "class" and "struct" interchangably). At present hist supports:
+
+* https://en.cppreference.com/w/cpp/language/types.html[Fundamental types] (e.g. int, float, char, std::uint8_t)
+* C arrays
+* std::array's
+* std::vector's
+* std::optional's
+* std::string's *
+* Types which support both operator= and serialization/deserialization via reinterpret_cast to bytes **
+* Any struct or class containing the above
+
+_{asterisk} Note that std::string along with other containers could be greatly improved by recieving their own set of specialized ops like std::vector has, and may not at this time be appropriate for large, heavily mutated strings (e.g. a notepad application)_ +
+_{asterisk}{asterisk} Future support for hist and serialization customization could improve this_
+
+== 2.) Reflect!
+
+Unless you're living in the post-C++26 future - you need to include reflect.h and use a https://github.com/TheNitesWhoSay/RareCpp/wiki/2.1.-Reflection:-REFLECT-Macro[reflection macro] (note that macroless reflection is insufficent, due to the need for https://github.com/TheNitesWhoSay/RareCpp/wiki/2.4.-Reflection:-Adaptive-Structures[adaptive structures]) - this is easiest to write inside the class, but you may also reflect from https://github.com/TheNitesWhoSay/RareCpp/wiki/2.1.-Reflection:-REFLECT-Macro#reflect-from-outside-class-bodies[outside the class].
+
+[,cpp]
+----
+struct Npc_data
+{
+    std::string name = "";
+    int hitpoints = 0;
+
+    REFLECT(Npc_data, name, hitpoints) // inside is preferred
+};
+//REFLECT_PRIVATE(Npc_data, name, hitpoints) // outside is fine if needed
+----
+
+== 3.) Create your tracked class
+
+You can use ``nf::make_tracked``, if your use case is trivially simple, e.g.
+
+[,cpp]
+----
+auto jj = nf::make_tracked(Npc_data{.name = "jj", .hitpoints = 120});
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/KnPEqa4Ej,window=read-later,align="left"]
+
+In most cases you'll want to create your own tracked class by extending nf::tracked; you need to provide your source data class and your tracked class as template arguments, and you need a constructor initializing ``tracked`` with ``this``. e.g.
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+};
+----
+
+== 4.) Initialize your data
+
+You have a few options here...
+
+* You can do "nothing" and lean on the source data classes https://www.learncpp.com/cpp-tutorial/default-member-initialization/[default member initializers] and/or https://www.learncpp.com/cpp-tutorial/default-constructors-and-default-arguments/[default constructor] (optionally followed by a call to ``record_init``). image:godbolt_example.svg[Example,link=https://godbolt.org/z/b9qarjfKa,window=read-later,align="left"]
+* You can perform an "untracked" initialization using the ``init_data<false>`` method - you supply an instance of your source data struct to be moved into the tracked storage; no history will be generated for the initialization event. image:godbolt_example.svg[Example,link=https://godbolt.org/z/EcMc13MhT,window=read-later,align="left"]
+* You can perform a "tracked" initialization using the ``init_data<true>`` method - you supply an instance of your source data struct to be moved into the tracked storage, and this will be recorded as the first action in hist. image:godbolt_example.svg[Example,link=https://godbolt.org/z/q3E8Gv7qx,window=read-later,align="left"]
+
+Note that ``init_data`` can only be called when history is empty, you can use ``.clear_history`` or you can replace your entire object without clearing history using ``tracked()->assign(..)``
+
+Additionally, note that your initialization event does not _have_ to be tracked for all cases, e.g. undo-redos will be fine without it, but it's recommended for others, such as making replays resilient to code changes.
+
+== 5.) Try reading from your data!
+
+[,cpp]
+----
+struct Npc_data
+{
+    std::string name = "jj";
+    int hitpoints = 120;
+
+    REFLECT(Npc_data, name, hitpoints)
+};
+
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+};
+
+int main()
+{
+    Npc npc {};
+    assert(npc.read.hitpoints == 120);
+    assert(npc->hitpoints == 120);
+    std::cout << Json::out(*npc) << std::endl;
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/K8TY6Gerq,window=read-later,align="left"]
+
+The member variable ``read`` is a const & to your stored source data class (``Npc_data``) that you can use, alternatively you can use pointer semantics; you can also leverage RareCpp's JSON library if you wish as your struct is already reflected.
+
+Note that you *can* edit your data with the tracked()-> syntax, such that -> is reading and ()-> is modifying, but for reasons we'll get into in the next section, creating an explicit action is usually preferrable.

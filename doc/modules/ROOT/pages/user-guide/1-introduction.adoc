@@ -1,0 +1,36 @@
+= Introduction
+
+Nf hist is a library which provides robust, low-overhead, automated data-change tracking.
+
+Your Data Struct -> [Reflection Magic] -> Tracked Data Struct
+
+[,cpp]
+----
+auto smith = nf::make_tracked(Npc{.name = "Perrin", .hitpoints = 120});
+
+smith()->hitpoints += 30;
+assert(smith->hitpoints == 150);
+
+smith.undo_action();
+assert(smith->hitpoints == 120);
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/xee35T3qc,window=read-later,align="left"]
+
+== Use cases:
+
+1. *Track data changes without writing explicit tracking code*
+2. *Enable undo-redo* (and in future versions, time-travelling to previous states)
+3. Have access to simple, opt-in *listener methods for data changes*
+4. Enable *replaying data changes* from the start or from a previous state
+5. *Render data changes* (e.g. for auditing or history UIs)
+6. Facilitate *programmatic traversal* of data changes
+7. _(Future) Automatically stream history to file from a separate thread_
+8. _(Future) Facilitate data-recovery after crashes_
+9. _(Future) Enable data-change scripting_
+10. _(Future) Stream/synchronize data changes (note: spec needs user-specific selections)_
+
+== Technical features:
+
+. *Minimal Data Usage*: Only the minimum data required to remember the change & enable fast undo-redos is used, not the whole state of the object/sub-objects.
+. *High Performance*: Minimal allocations (individual ops don't depend on allocations), no polymorphism or type erasure (strong types end-to-end via metaprogramming), copies & stack usage is minimized, unused features & checks excluded at compile time; many specialized ops
+. *IDE & auto-complete friendly code*: Reflection is used to create the tracked data structure in such a way that the user can use auto-complete and write code to edit their data structures the ~same as though it were their source structure

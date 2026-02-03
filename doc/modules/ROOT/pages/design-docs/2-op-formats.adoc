@@ -1,0 +1,48 @@
+= Op Formats
+
+```
+// The first {} is the data required to perform the operation, the --{} is additional data required for fast undos
+reset // {} ("value = {};") --{n, value_0, ..., value_n, m, selections}
+reserve // {new_size}
+trim,
+assign // {new_size, value} --{n, value_0, ..., value_n, m, selections}
+assign_default // {new_size} --{n, value_0, ..., value_n, m, selections}
+clear_selections // --{n, index_0, ..., index_n}
+select_all // {} --{n, index_0, ..., index_n}
+select // {index}
+select_n // {n, index_0, ..., index_n}
+deselect // {index} --{sel_index}
+deselect_n,  // {n, index_0, ..., index_n} --{sel_index_0, ..., sel_index_n}
+toggle_selection // {index} --{u8_bool_selected, sel_index}
+toggle_selection_n // {n, index_0, ..., index_n} --{bitset_index_was_selected, sel_index_0, ..., sel_index_n}
+sort_selections // {n, index_0_source_index, ..., index_n_source_index}
+sort_selections_desc // {n, index_0_source_index, ..., index_n_source_index}
+set // {value} --{prev_value}
+set_n // {n, index_0, ..., index_n, value} --{value_0, ..., value_n}
+set_l // {value} --{value_0, ..., value_n} // Same as set_n, except the selections make up the indexes
+append // {value}
+append_n // {n, value_0, ..., value_n}
+insert // {index, value}
+insert_n // {n, index, value_0, ..., value_n}
+remove // {index} --{value, u8_bool_was_selected, sel_index}
+remove_n // {n, index_0, ..., index_n} --{value_0, ..., value_n, bitset_index_selected, m, sel_index_0, ..., sel_index_m} where index_0 > ... > index_n
+remove_l // {} --{n, index_0, ..., index_n, value_0, ..., value_n, selections} // Same as remove_n, except the selections make up the indexes
+sort // {n, index_0_source_index, ..., index_n_source_index}
+sort_desc // {n, index_0_source_index, ..., index_n_source_index}
+swap // {index_0, index_1}
+move_up // {index}
+move_up_n // {n, index_0, ..., index_n}
+move_up_l // {} --{selections} // Same as move_up_n, except the selections make up the indexes
+move_top // {index}
+move_top_n // {n, index_0, ... index_n} --{selections}
+move_top_l // {} --{selections} // Same as move_top_n, except the selections make up the indexes
+move_down // {index}
+move_down_n // {n, index_0, ... index_n}
+move_down_l // {} --{selections} // Same as move_down_n, except the selections make up the indexes
+move_bottom // {index}
+move_bottom_n // {n, index_0, ... index_n} --{selections}
+move_bottom_l // {} --{selections} // Same as move_down_n, except the selections make up the indexes
+move_to // {index, target_index}
+move_to_n // {n, target_index, index_0, ..., index_n} --{selections}
+move_to_l // {target_index} --{selections} // Same as move_to_n, except the selections make up the indexes
+```

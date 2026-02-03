@@ -1,0 +1,170 @@
+= Action User Data
+
+== Basic User Data
+
+If you wish to display the undo-redo history in your application you'll note that rendered events are all technical descriptions of data changes. Perhaps this is fine for some audiences but most applications will want a user-friendly description for actions.
+
+For this purpose you can add some (opt-in) user-data to your types using the third template argument to nf::tracked e.g.
+
+[,cpp]
+----
+// Define some data structure you want attached to each action
+struct Notes
+{
+    std::string value;
+
+    // Your type must be comparable with operator==
+    bool operator==(const Notes & other) const { return value == other.value; }
+};
+
+struct Npc : nf::tracked<Npc_data, Npc, Notes> // <-- add the type here
+{
+    Npc() : tracked(this) {}
+};
+----
+
+Now when you render actions, you'll get back that user data and you can use it to provide user-friendly descriptions e.g.
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc, Notes>
+{
+    Npc() : tracked(this) {}
+
+    void hit(int damage, std::string source)
+    {
+        auto edit = create_action({"Npc is getting hit by " + source});
+        edit->hitpoints -= damage;
+    }
+};
+
+int main()
+{
+    Npc npc {};
+    npc.hit(12, "burn");
+    npc.hit(20, "poison");
+    
+    for ( std::size_t i=0; i<npc.total_actions(); ++i )
+        std::cout << npc.get_action_user_data(i).value << '\n';
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/4ex61hqjn,window=read-later,align="left"]
+
+Action user data can be used for other things as well, such as storing the timestamp when an action was submitted, or whatever else your application might need - keeping this data minimal is advisable (e.g. if you can get by with a descriptor enum and an epoch, don't generate strings at this point), as this keeps the hist size down as well as overhead for creating actions minimal.
+
+== Better Labels
+
+Strongly consider something akin to the following for labeling purposes as, unlike the above, you can avoid creating & storing repetitive strings with every action:
+
+[,cpp]
+----
+enum class Descriptor
+{
+    none,
+    pickup_item,
+    recieve_trade_item,
+    drop_item,
+    burn_damage_tick,
+    poison_damage_tick
+};
+
+struct Action_descriptor
+{
+    Descriptor descriptor = Descriptor::none;
+    constexpr Action_descriptor() noexcept = default;
+    constexpr Action_descriptor(Descriptor descriptor) : descriptor(descriptor) {}
+    friend constexpr bool operator==(const Action_descriptor & lhs, const Action_descriptor & rhs) noexcept { return lhs.descriptor == rhs.descriptor; }
+};
+
+struct Item
+{
+    std::string label = "";
+    float value = 0.0f;
+
+    REFLECT(Item, label, value)
+};
+
+struct Npc_data
+{
+    std::string name = "";
+    int hitpoints = 50;
+    std::vector<Item> inventory {};
+
+    REFLECT(Npc_data, name, hitpoints, inventory)
+};
+
+struct Npc : nf::tracked<Npc_data, Npc, Action_descriptor>
+{
+    Npc() : tracked(this) {}
+
+    void pickup_item(const Item & item)
+    {
+        auto edit = create_action(Descriptor::pickup_item);
+        edit->inventory.append(item);
+    }
+
+    void recieve_trade_item(const Item & item)
+    {
+        auto edit = create_action(Descriptor::recieve_trade_item);
+        edit->inventory.append(item);
+    }
+
+    void drop_item(std::size_t index)
+    {
+        if ( index < read.inventory.size() )
+        {
+            auto edit = create_action(Descriptor::drop_item);
+            edit->inventory.remove(index);
+        }
+    }
+
+    void apply_burn_tick()
+    {
+        auto edit = create_action(Descriptor::burn_damage_tick);
+        edit->hitpoints -= 12;
+    }
+
+    void apply_poison_tick()
+    {
+        auto edit = create_action(Descriptor::poison_damage_tick);
+        edit->hitpoints -= 20;
+    }
+
+    void process_tick()
+    {
+        apply_burn_tick();
+        apply_poison_tick();
+    }
+
+    void after_action(std::size_t index)
+    {
+        auto descr = get_action_user_data(index).descriptor;
+        switch ( descr )
+        {
+            case Descriptor::pickup_item: std::cout << "Picked up item\n"; break;
+            case Descriptor::recieve_trade_item: std::cout << "Received item\n"; break;
+            case Descriptor::drop_item: std::cout << "Dropped item\n"; break;
+            case Descriptor::burn_damage_tick: std::cout << "Burn damage\n"; break;
+            case Descriptor::poison_damage_tick: std::cout << "Poison damage\n"; break;
+            case Descriptor::none: break;
+        }
+
+        nf::rendered_action<Action_descriptor> action {};
+        render_action(index, action, true);
+        for ( auto & event : action.change_events )
+            std::cout << "  " << event.summary << '\n';
+
+        std::cout << '\n';
+    }
+};
+
+int main()
+{
+    Npc npc {};
+    npc.pickup_item(Item{.label = "Bones", .value = 0.5f});
+    npc.recieve_trade_item(Item{.label = "Sword", .value = 50.0f});
+    npc.drop_item(0);
+    npc.process_tick();
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/8jznvc5Y7,window=read-later,align="left"]

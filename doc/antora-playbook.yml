@@ -1,0 +1,26 @@
+site:
+  title: Nf Hist
+  start_page: nf-hist::index.adoc
+content:
+  sources:
+  - url: ../
+    start_path: ./doc
+    branches: HEAD
+    edit_url: ~
+ui:
+  bundle:
+    url: https://gitlab.com/antora/antora-ui-default/-/jobs/artifacts/HEAD/raw/build/ui-bundle.zip?job=bundle-stable
+    snapshot: true
+  supplemental_files:
+  - path: ui.yml
+    contents: |
+      static_files:
+      - .nojekyll
+  - path: .nojekyll
+  - path: partials/header-content.hbs
+    contents: ./supplemental-ui/partials/header-content.hbs
+  - path: partials/toolbar.hbs
+    contents: ./supplemental-ui/partials/toolbar.hbs
+asciidoc:
+  attributes:
+    page-toclevels: 2

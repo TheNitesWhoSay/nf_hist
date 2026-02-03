@@ -1,0 +1,37 @@
+= Event & Action Formats
+
+The change hist consists of two main parts - the action vector and events.
+
+Unless some user-data was added via the User_data template parameter (in which case nf::action inherits from User_data, otherwise empty-base optimization applies), the action vector contains only the indexes of the first event belonging to that action. The next action or last event in the events vector determines the end.
+
+```
+template <class User_data = no_user_data>
+struct Action : User_data {
+    std::size_t first_event_index;
+};
+std::vector<nf::action<User_data>> actions;
+```
+
+Events then consist of the event offsets vector which contains the offset of each event in the events vector.
+
+```
+std::vector<std::uint64_t> event_offsets;
+std::vector<std::uint8_t> events; // First byte is unused
+```
+
+Events are laid out one after the other, each event contains a 1-byte op code (given by the enum "op"), followed by the pathway to the member/sub-member/sub-element edited by this data-change-event, then the data format specific to the op.
+
+Pathway bytes are read as follows:
+
+1. Begin recursion at the root object
+2. Read in a byte, the highest bit determines if this is a leaf branch (last branch in the pathway) or whether further branches follow, the second highest bit determines whether this is a "selection" branch (the current selection is operated on).
+3. Then the lower 6-bits are used or an index after them is read depending on the highest two bits.
+    * branch: the lower 6-bits identify a field or array index (for array sizes <= 64, else an integer&#42; follows) depending on the type currently recursed to.
+    * sel_branch: the lower 6-bits are unused, the currently selection is visited (further branches down from here may be used)
+    * leaf_sel_branch: Same as sel_branch unless this is the first path byte, in which case this means use the root element.
+4. If this was a leaf branch, run the op using the element/member at the index given by (3), else recurse to it and return to step (2) (either way this may occur N times for every element in a selection if this was a sel branch)
+
+_&#42; The integer is the smallest fixed-width unsigned integer capable of holding all the indexes for the given array size, or if it's a dynamically-sized container, std::size_t (usually std::uint64_t, but may be std::uint32_t or very rarely std::uint16_t) - or that given by the user-specified index_size annotation._
+
+
+Following read of the pathway the data specific to the op begins, what data that is depends on the op and will be gone over in xref:design-docs/2-op-formats.adoc[].

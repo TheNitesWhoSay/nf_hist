@@ -1,0 +1,7 @@
+= Reflective Class Generation
+
+Reflective class generation is the process by which a tracked class is generated using a source data class, here also is how the data/class relationships are internally laid out, this is an implementation detail documented mostly for the purpose of library maintainers and coders interested in how it works; though client coders may also get some use out of it by better understanding tracked classes.
+
+(Need a class diagram)
+
+(TODO: explain class diagram)

@@ -1,0 +1,17 @@
+= Change Notification Ordering
+
+In a given op the actual change to the data and the CARMS notifications (change, add, remove, move, selchage), with limited exceptions, can be expected in this order:
+
+1. Element removal notifications
+2. The actual data change
+3. Value change notification
+4. Element addition notifications
+5. Element moved notifications
+6. Selection change notifications
+
+Some bulk ops may - in limited situations - mix the ordering of these notifications in order to improve performance and eliminate the need for additional allocations or stack usage; however the following hard rules will still be observed:
+
+1. Element removal notifications provide you an index of the element about to be removed, which is guaranteed to still be a valid reference to the removed element in the container until you return from the notification method (that is, elements are not removed until their removal notification is processed).
+2. Element added notifications provide you an index of the element added, which is guaranteed to be a valid reference to the added element in the container until you return from the notification method (that is, the element added will not be removed, bumped forward, or otherwise moved until their removal notification is processed).
+3. Element moved notifications come after the changes to the container, with their to_index being the position they're in now/with observable contents, and their from_index being the position they were in prior to the op (you cannot meaningfully observe the contents of the from_index element).
+4. Selection change notifications come last in an op and may be sent when an op occurs that is potentially selection changing, not only when an op has actually made changes to the selection.

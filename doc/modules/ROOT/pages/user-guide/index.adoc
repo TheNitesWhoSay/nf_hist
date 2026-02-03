@@ -1,0 +1,12 @@
+= User Guide
+
+1. xref:user-guide/1-introduction.adoc[]
+2. xref:user-guide/2-tracked-types.adoc[]
+3. xref:user-guide/3-actions-events-ops.adoc[]
+4. xref:user-guide/4-history-undo-redo.adoc[]
+5. xref:user-guide/5-edit-sub-elements.adoc[]
+6. xref:user-guide/6-notifications.adoc[]
+7. xref:user-guide/7-selections.adoc[]
+8. xref:user-guide/8-attached-data.adoc[]
+9. xref:user-guide/9-action-user-data.adoc[]
+10. xref:user-guide/10-manual-optimizations.adoc[]

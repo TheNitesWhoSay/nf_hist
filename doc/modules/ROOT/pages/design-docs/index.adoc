@@ -1,0 +1,9 @@
+= Design Docs
+
+Documents describing the technical design and details of the library.
+
+1. xref:design-docs/1-event-action-formats.adoc[]
+2. xref:design-docs/2-op-formats.adoc[]
+3. xref:design-docs/3-user-data-format.adoc[]
+4. xref:design-docs/4-change-notification-ordering.adoc[]
+5. xref:design-docs/5-paths-keys-operate-on.adoc[]

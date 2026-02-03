@@ -1,0 +1,88 @@
+= Selections
+
+== Primer
+
+A common operation in editors is selecting the elements of a collection and then performing operations on all of them at once - be it copying, editing, moving them all up/down/to top/to bottom, or deleting them; having client code resend selection indexes for every op is not just clunky for the client coder, it leads to those same indexes being recorded repetedly, bloating the history size.
+
+Selection is also itself often an undoable operation in editors and when elements get removed from a vector, not only do the selected elements need to be removed, but selection indices higher than them in ordered containers need to be updated, this is a significant synchronization burden.
+
+For these reasons, hist has first-class support for selections on all arrays (via bitsets) and containers (index vectors). Ops exist for the user to update selections, operate upon selections, and when ops occur that require synchronization activities (e.g. removals, positional insertions, sorts), hist will automatically update selection indices appropriately.
+
+== Usage
+You can make selections by calling methods like ``select`` on a container; once you have a selection you can operate on ``selection()`` to make changes to all selected items. image:godbolt_run.svg[Run,link=https://godbolt.org/z/4vYfYPGxq,window=read-later,align="left"]
+
+[,cpp]
+----
+npc.init_data(Npc_data{.inventory {
+    Item { .label = "Bow", .value = 40.0f },
+    Item { .label = "Arrows x50", .value = 10.0f },
+    Item { .label = "Sword", .value = 50.0f }
+}});
+edit->inventory.select({0, 2});
+edit->inventory.selection().value = 5.0f; // Perform operation on selection
+assert(npc->inventory[0].value == 5.0f &&
+       npc->inventory[1].value == 10.0f &&
+       npc->inventory[2].value == 5.0f);
+----
+
+You can read the current selection on a container using ``view``: image:godbolt_run.svg[Run,link=https://godbolt.org/z/afhbKo5oe,window=read-later,align="left"]
+
+[,cpp]
+----
+const auto expected_sel = std::vector<std::size_t>{0, 2};
+assert(npc.view.inventory.sel() == expected_sel);
+----
+
+You can manage which indicies you have selected with...
+
+* clear_selections()
+* select_all()
+* select(i)
+* select(vec<i>)
+* deselect(i)
+* deselect(vec<i>)
+* toggle_selected(i)
+* toggle_selected(vec<i>)
+
+You can sort the order of the selected incidies (not the values the selections refer to) using...
+
+* sort_selection()
+* sort_selection_descending()
+
+And besides operating on selection() to set values you can have the selection deleted or moved around:
+
+* remove_selection()
+* move_selections_up()
+* move_selections_top()
+* move_selections_down()
+* move_selections_bottom()
+* move_selections_to(i)
+
+Various examples:
+
+[,cpp]
+----
+Npc npc {};
+npc.init_data(Npc_data{.inventory {
+    Item { .label = "Bow", .value = 40.0f },
+    Item { .label = "Arrows x50", .value = 10.0f },
+    Item { .label = "Sword", .value = 50.0f }
+}});
+
+auto edit = npc.create_action();
+edit->inventory.select({0, 2});
+const auto expected_sel = std::vector<std::size_t>{0, 2};
+
+edit->inventory.clear_selections();
+edit->inventory.select_all();
+edit->inventory.toggle_selected(1);
+edit->inventory.deselect(2);
+edit->inventory.sort_selection();
+assert(npc.view.inventory.sel() == std::vector<std::size_t>{0});
+
+edit->inventory.selection().value = 5.0f;
+
+edit->inventory.move_selections_bottom();
+edit->inventory.remove_selection();
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/j3fPjEsnP,window=read-later,align="left"]

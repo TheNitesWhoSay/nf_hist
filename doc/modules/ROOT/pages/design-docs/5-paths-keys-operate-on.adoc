@@ -1,0 +1,21 @@
+= Paths, Keys & Operate-On
+
+*Paths/Pathways*: Conceptually, a path represents how you get from the root source data object, to a particular member/sub-member/sub-element. Code-wise a path is nothing more than a type-list (often stored in a tuple); paths consist of "Path-elements".
+
+*Path-element*: A path element identifies: a member ("path_member"), a random access index ("path_index"), or a selection ("path_selections").
+
+*Keys*: When tracked editing code uses a random access operator (e.g. ``edit->ray[2] = 3;`` has the [] operator) or map-key access (in future versions of the library), the index or key-value used is called a "key", a collection of these keys stored in a tuple can be associated with a path.
+
+*Route*: When a Path is combined with a set of Keys you have everything necessary to find a particular member/sub-member/sub-element (not just to identify which member/sub-member/sub-element, but to access one as a reference), this combination of Path and Keys is called a route.
+
+When compiling code that edits tracked objects, path type-lists/tuples are generated specific to the paths you take. The index of path_members is known at compile time and not stored at runtime, while the random-access index/keys used are not necessarily known at compile time and are thus written into a tuple at runtime.
+
+When you perform an edit (e.g. ``... = 3``), this is an operator= overload (or another function/operator for different ops), which has your path - so it uses the "operate_on" function to get a reference to the member/sub-member/sub-element being edited. When you undo or redo an action/events you don't have the path-type list available, for these "process_event_ref" is used.
+
+*"operate_on"*: function to which the library provides your pathway, keys, and a lambda to call, and operate_on calls that lambda with a reference to the particular member/sub-member/sub-element being edited. In the first call to the function a reference to the root source-data-object is passed, each recursion gets a reference to the next member/sub-member/sub-element in the path (using the appropriate key if applicable). If all path elements have been processed then the lambda is called with the reference to the member/sub-member/sub-element indicated by the pathway/keys.
+
+*"process_event_ref"*: function to which the library provides your serialized path & keys and a reference to the root source-data-object. The function gets a reference to the next member/sub-member/sub-element in the path (using the given key if applicable), and also synthetically adds to an (initially empty) path tuple upon each recursion step, and when the full path has been processed, calls process_undo_event or process_redo_event with a reference to the particular member/sub-member/sub-element referenced by the event, and the path tuple to get there.
+
+Note: with process_event_ref (and thus undo & redo) that because the compiler has no way of knowing which paths you're visiting (it's just reading bytes), the compiler generates code to visit *ALL* paths. Because of this, when dealing with large complicated object trees, it's advisable to put undo and redo calls in their own TU, and you may need some kind of bigobj setting for especially large objects; not only will using a separate TU help you stay within compiler limits but it will speed up incremental compiles a ton. Code that depends on this function was heavily optimized to reduce the amount of symbols generated but ultimately it can still scale heavily depending on the source-data-object.
+
+*"print_event"*: performs a very similar recursion to that of process_event_ref, rendering code is thus, for the same reason, also recommended to be placed in its own TU/.cpp file especially for large complicated source-data-objects.

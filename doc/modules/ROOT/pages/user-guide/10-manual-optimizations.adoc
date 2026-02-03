@@ -1,0 +1,80 @@
+= Manual Optimizations
+
+== Measure & Cap History Size
+
+The best optimization you can do both for size and runtime is to use the more representative op - e.g. setting a container to an entirely new set of values with operator= should be a last resort - as hist has to record the entire state before and state after, when you could use one of the moves, inserts, or sorts.
+
+With use of rendering you can estimate the size hist is taking up as well as the size of particular actions and events.
+
+[,cpp]
+----
+std::size_t sum_history_size(auto & tracked)
+{
+    std::size_t total_size = 0;
+    auto action_count = tracked.total_actions();
+    for ( std::size_t i=0; i<action_count; ++i )
+    {
+        nf::rendered_action<> action {};
+        tracked.render_action(i, action);
+        total_size += action.byte_count;
+    }
+    return total_size;
+}
+----
+
+You can make use of the after_action notification to trim the hist size down to a certain size limit (e.g. 500MB) when it exceeds some reasonable limit for your application.
+
+[,cpp]
+----
+struct Npc : nf::tracked<Npc_data, Npc>
+{
+    Npc() : tracked(this) {}
+
+    std::size_t max_action_count = 10;
+    std::size_t max_hist_bytes = 300;
+    std::size_t running_byte_count = 0;
+
+    void after_action(std::size_t index)
+    {
+        nf::rendered_action<> action {};
+        render_action(index, action, false);
+        running_byte_count += action.byte_count;
+        if ( running_byte_count > max_hist_bytes ) // Size limit
+            running_byte_count = trim_history_to_size(max_hist_bytes*4/5);
+        else if ( total_actions() > max_action_count ) // Action count limit
+        {
+            trim_history(max_action_count/5); // Reduce action count
+            running_byte_count = 0;
+            auto action_count = total_actions();
+            for ( std::size_t i=0; i<action_count; ++i )
+            {
+                nf::rendered_action<> act {};
+                render_action(i, act, false);
+                running_byte_count += act.byte_count;
+            }
+        }
+    }
+};
+----
+
+== Specify Index Sizes
+
+Another optimization you can do - aside from of course directly reducing your structure sizes or the amount of tracked fields/data - is compress the index sizes used by collections. As indexes are used ubiquitously for container ops and hist assumes size_t (usually 8-byte indexes), selecting a smaller index size for your containers - if you have a known maximum size - can make a huge difference. You can do so using the index_size annotation.
+
+[,cpp]
+----
+struct OptimizedNpc
+{
+    std::string name = "";
+    int hitpoints = 50;
+
+    NOTE(inventory, nf::index_size<std::uint8_t>)
+    std::vector<Item> inventory {};
+
+    REFLECT(OptimizedNpc, name, hitpoints, inventory)
+};
+----
+
+In a micro-comparison vs not using the annotation for some small events this takes history size down from 72 to 58, a 20% size savings.
+
+image::godbolt_example.svg[Example,link=https://godbolt.org/z/rooz4GxW3,window=read-later,align="left"]

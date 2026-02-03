@@ -1,0 +1,29 @@
+= User-Data Format
+
+Source-data - that is the fields/sub-fields/sub-elements in the source-data object - is serialized to a binary format; presently NF lacks a full binary serialization library, and as such hist has its own specification for how C++ objects are serialized to binary. Additionally until a full serializer is complete said format depends partially on the size of size_t (e.g. 32-bit vs 64-bit binary formats will differ) - as well as the size of primitives (e.g. int, float) when such types are used. Hists binary spec will match types against the following for serialization:
+
+```
+Strings:
+    {IndexType:size, all characters casted to bytes}
+    
+Optionals:
+    {u8bool:hasValue, recursive call to serialize}
+
+flat_mdspan:
+    {IndexType:sizeIn1d, recursive serialization of all elements}
+    
+C-style array (including md-arrays):
+    {IndexType:sizeIn1d, recursive serialization of all elements}
+    
+std::array:
+    {IndexType:size, recursive serialization of all elements}
+    
+iterable (e.g. std::vector):
+    {IndexType::size, recursive serialization of all elements}
+    
+reflected object:
+    {recursive serialization of all fields in the order they are reflected or declared}
+    
+all else:
+    {sizeof(type) bytes of the type as given by reinterpret_cast to byte}
+```

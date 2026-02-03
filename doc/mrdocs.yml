@@ -1,0 +1,32 @@
+source-root: ../include
+input:
+  - ../include/nf
+exclude:
+  - ../include/rarecpp
+include-symbols:
+  - "nf::**"
+  - "nf_hist::action_status"
+  - "nf_hist::attach_data"
+  - "nf_hist::editor"
+  - "nf_hist::index_size"
+  - "nf_hist::make_path"
+  - "nf_hist::make_tracked"
+  - "nf_hist::rendered_action"
+  - "nf_hist::simple_tracked"
+  - "nf_hist::tracked"
+  - "nf_hist::tracked_element"
+exclude-symbols:
+  - "std::**"
+  - "RareTs::**"
+  - "RareMapper::**"
+  - "RareBuilder"
+  - "Json::**"
+  - "nf_hist::agent::**"
+  - "nf_hist::tracked::Class"
+  - "nf_hist::tracked::Class::**"
+  - "nf_hist::u8bool::**"
+  - "nf_hist::collapsed_index_type::**"
+extract-friends: false
+output: ./modules/api/pages
+multipage: true
+generator: adoc

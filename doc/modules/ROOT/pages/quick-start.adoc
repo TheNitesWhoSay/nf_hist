@@ -1,0 +1,57 @@
+= Quick Start
+
+Nf-hist is a C&#43;&#43;20 header-only library, no special setup/configuration is needed beyond including the headers you're using in your project, using at least C&#43;&#43;20, and having a compatible compiler.
+
+Recommendation: fetch the headers from git via cmake, add nf and rarecpp's shared include directory to your project, such that you can ``#include <nf/hist.h>`` and ``#include <rarecpp/reflect.h>``.
+
+While less advisable, you can also simply copy the contents of the https://github.com/TheNitesWhoSay/RareCpp/tree/master/include[include directory] to your project.
+
+== Header-Only
+
+Download, clone, or copy the https://github.com/TheNitesWhoSay/RareCpp/tree/master/include[include directory] into your project.
+
+== Fetch via cmake
+
+----
+include(FetchContent)
+FetchContent_Declare(
+  rarecpp
+  GIT_REPOSITORY https://github.com/TheNitesWhoSay/RareCpp.git
+  GIT_TAG 0022f0f
+)
+FetchContent_MakeAvailable(rarecpp)
+include_directories(${rarecpp_SOURCE_DIR}/include)
+----
+
+== Compiler Compatibility
+
+GCC, Clang and MSVC/Visual Studios are directly supported by this library, other compilers, especially those based on the big three may well work regardless; please report issues even with unsupported compilers, though ability to resolve issues on unsupported compilers may be limited.
+
+* GCC Minimum: 12.2
+* Clang Minimum: 17.0.1
+* MSVC Minimum: 19.44 (Visual Studios 2022 version 17.14 and up)
+
+== Simple Example
+
+Once included, you can run a simple code example e.g. 
+
+[,cpp]
+----
+#include <rarecpp/reflect.h>
+#include <nf/hist.h>
+#include <iostream>
+
+struct Npc
+{
+    int hitpoints = 0;
+};
+REFLECT_PRIVATE(Npc, hitpoints)
+
+int main()
+{
+    auto npc = nf::make_tracked(Npc{.hitpoints = 120});
+    npc()->hitpoints += 30;
+    npc.print_change_history(std::cout);
+}
+----
+image::godbolt_run.svg[Run,link=https://godbolt.org/z/5EGdze478,window=read-later,align="left"]
