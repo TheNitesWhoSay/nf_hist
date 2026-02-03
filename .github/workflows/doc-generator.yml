@@ -1,0 +1,38 @@
+name: Documentation Generator
+run-name: Documentation generation for commit ${{ github.sha }}
+on: # Push to main occurs which includes a change to something in the /doc folder
+  push:
+    branches:
+      - main
+    paths:
+      - 'doc/**'
+  workflow_dispatch:
+permissions:
+  pages: write
+  id-token: write
+jobs:
+  doc_gen:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+      - name: Install Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '18'
+      - name: Install Antora
+        run: npm i antora
+      - name: Generate Site
+        working-directory: /home/runner/work/nf_hist/nf_hist/doc
+        run: npx antora generate antora-playbook.yml
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: doc/build/site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
