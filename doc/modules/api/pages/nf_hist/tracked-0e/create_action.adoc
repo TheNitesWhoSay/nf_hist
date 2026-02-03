@@ -1,0 +1,17 @@
+[#nf_hist-tracked-0e-create_action]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::create&lowbar;action
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+auto
+create&lowbar;action(User&lowbar;data user&lowbar;data = &lcub;&rcub;);
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,16 @@
+[#nf_hist-tracked_element-view]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked_element.adoc[tracked&lowbar;element]::view
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+Read&lowbar;edit&lowbar;pair::edit&lowbar;type const& view;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

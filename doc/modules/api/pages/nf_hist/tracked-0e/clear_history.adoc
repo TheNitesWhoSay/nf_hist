@@ -1,0 +1,17 @@
+[#nf_hist-tracked-0e-clear_history]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::clear&lowbar;history
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+void
+clear&lowbar;history();
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

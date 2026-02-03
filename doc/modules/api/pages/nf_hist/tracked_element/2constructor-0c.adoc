@@ -1,0 +1,18 @@
+[#nf_hist-tracked_element-2constructor-0c]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked_element.adoc[tracked&lowbar;element]::tracked&lowbar;element
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+tracked&lowbar;element(
+    xref:nf_hist/tracked_element.adoc[tracked&lowbar;type]* tracked,
+    xref:nf_hist/tracked_element.adoc[keys&lowbar;type] keys);
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

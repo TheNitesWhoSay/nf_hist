@@ -1,0 +1,37 @@
+[#nf_hist-simple_tracked-026]
+= xref:nf_hist.adoc[nf&lowbar;hist]::simple&lowbar;tracked
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+struct simple&lowbar;tracked
+    : xref:nf_hist/tracked-0d.adoc[nf&lowbar;hist::tracked&lt;Data, simple&lowbar;tracked&lt;Data, User&lowbar;data&gt;, User&lowbar;data&gt;]
+----
+
+== Base Classes
+
+[cols=2]
+|===
+| Name
+| Description
+| `xref:nf_hist/tracked-0d.adoc[nf&lowbar;hist::tracked&lt;Data, simple&lowbar;tracked&lt;Data, User&lowbar;data&gt;, User&lowbar;data&gt;]`
+| The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+|===
+
+== Member Functions
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/simple_tracked-026/2constructor-0b.adoc[`simple&lowbar;tracked`]         [.small]#[constructor]#
+| Constructors
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

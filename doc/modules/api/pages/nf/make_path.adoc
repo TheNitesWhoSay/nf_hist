@@ -1,0 +1,25 @@
+[#nf-make_path]
+= xref:nf.adoc[nf]::make&lowbar;path
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::make&lowbar;path;
+----
+
+== Introduced Symbols
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/make_path.adoc[nf&lowbar;hist::make&lowbar;path]
+| Used to create a path to some element within the source data class, typically used for creating notification methods or tracked sub&hyphen;elements e&period;g&period; using my&lowbar;path &equals; nf&colon;&colon;make&lowbar;path&lt;decltype(root&hyphen;&gt;my&lowbar;collection&lsqb;0&rsqb;&period;my&lowbar;field)&gt;&semi; or&period;&period;&period; using my&lowbar;path &equals; NF&lowbar;PATH(root&hyphen;&gt;my&lowbar;collection&lsqb;0&rsqb;&period;my&lowbar;field)&semi;
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

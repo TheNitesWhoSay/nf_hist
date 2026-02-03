@@ -1,0 +1,33 @@
+[#nf_hist-tracked-0e-trim_history]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::trim&lowbar;history
+:relfileprefix: ../../
+:mrdocs:
+
+Trims history so it starts at new&lowbar;first&lowbar;action&semi; if new&lowbar;first&lowbar;action is elided the trim starts at the next unelided action
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+trim&lowbar;history(std::size&lowbar;t new&lowbar;first&lowbar;action);
+----
+
+== Return Value
+
+new&lowbar;first&lowbar;action if new&lowbar;first&lowbar;action was not elided, the first unelided action after that otherwise, zero if history is or becomes empty
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *new&lowbar;first&lowbar;action*
+| the action you want to come first in the history after trimming
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

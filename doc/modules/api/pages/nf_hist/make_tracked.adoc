@@ -1,0 +1,21 @@
+[#nf_hist-make_tracked]
+= xref:nf_hist.adoc[nf&lowbar;hist]::make&lowbar;tracked
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;
+    class Data,
+    class User&lowbar;data = no&lowbar;user&lowbar;data&gt;
+requires RareTs&colon;&colon;is&lowbar;macro&lowbar;reflected&lowbar;v&lt;Data&gt;
+auto
+make&lowbar;tracked(Data&& data);
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,33 @@
+[#nf_hist-editor-2constructor-05]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/editor.adoc[editor]::editor
+:relfileprefix: ../../
+:mrdocs:
+
+Constructors
+
+== Synopses
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+Move constructor
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/editor/2constructor-03.adoc[editor](xref:nf_hist/editor.adoc[editor]&& other) noexcept;
+----
+
+[.small]#xref:nf_hist/editor/2constructor-03.adoc[_» more&period;&period;&period;_]#
+
+Construct from `Tracked`
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/editor/2constructor-0f.adoc[editor](Tracked* parent);
+----
+
+[.small]#xref:nf_hist/editor/2constructor-0f.adoc[_» more&period;&period;&period;_]#
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,89 @@
+[#index]
+= Global namespace
+:relfileprefix: 
+:mrdocs:
+
+== Namespaces
+
+[cols=1]
+|===
+| Name
+| xref:nf.adoc[`nf`] 
+| xref:nf_hist.adoc[`nf&lowbar;hist`] 
+|===
+
+== xref:nf.adoc[nf] namespace
+
+=== Using Declarations
+
+[cols=1]
+|===
+| Name
+| xref:nf/action_status.adoc[`action&lowbar;status`] 
+| xref:nf/attach_data.adoc[`attach&lowbar;data`] 
+| xref:nf/editor.adoc[`editor`] 
+| xref:nf/index_size.adoc[`index&lowbar;size`] 
+| xref:nf/make_path.adoc[`make&lowbar;path`] 
+| xref:nf/make_tracked.adoc[`make&lowbar;tracked`] 
+| xref:nf/rendered_action.adoc[`rendered&lowbar;action`] 
+| xref:nf/simple_tracked.adoc[`simple&lowbar;tracked`] 
+| xref:nf/tracked.adoc[`tracked`] 
+| xref:nf/tracked_element.adoc[`tracked&lowbar;element`] 
+|===
+
+== xref:nf_hist.adoc[nf&lowbar;hist] namespace
+
+=== Types
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/editor.adoc[`editor`] 
+| 
+| xref:nf_hist/rendered_action.adoc[`rendered&lowbar;action`] 
+| A reasonably user&hyphen;friendly rendering of an action
+| xref:nf_hist/simple_tracked-026.adoc[`simple&lowbar;tracked`] 
+| 
+| xref:nf_hist/simple_tracked-02b.adoc[`simple&lowbar;tracked`] 
+| 
+| xref:nf_hist/tracked-0e.adoc[`tracked`] 
+| The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+| xref:nf_hist/tracked-0d.adoc[`tracked`] 
+| The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+| xref:nf_hist/tracked_element.adoc[`tracked&lowbar;element`] 
+| Extended to provide mutable&sol;returnable tracked sub&hyphen;elements from your source data
+| xref:nf_hist/make_path.adoc[`make&lowbar;path`] 
+| Used to create a path to some element within the source data class, typically used for creating notification methods or tracked sub&hyphen;elements e&period;g&period; using my&lowbar;path &equals; nf&colon;&colon;make&lowbar;path&lt;decltype(root&hyphen;&gt;my&lowbar;collection&lsqb;0&rsqb;&period;my&lowbar;field)&gt;&semi; or&period;&period;&period; using my&lowbar;path &equals; NF&lowbar;PATH(root&hyphen;&gt;my&lowbar;collection&lsqb;0&rsqb;&period;my&lowbar;field)&semi;
+|===
+
+=== Enums
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/action_status.adoc[`action&lowbar;status`] 
+|===
+
+=== Functions
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/make_tracked.adoc[`make&lowbar;tracked`] 
+|===
+
+=== Variables
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/attach_data.adoc[`attach&lowbar;data`] 
+| Optional annotation specifying that a collection of the supplied type should be maintained as a parallel array to the type annotated e&period;g&period; NOTE(my&lowbar;units, nf&colon;&colon;attach&lowbar;data&lt;my&lowbar;graphics&gt;) std&colon;&colon;vector&lt;my&lowbar;unit&gt; my&lowbar;units&semi;
+| xref:nf_hist/index_size.adoc[`index&lowbar;size`] 
+| Optional annotation used to specify the index size type used in serialized history, specifying an index size smaller than std&colon;&colon;size&lowbar;t reduces history size, appropriate when there&apos;s a known limit to a given containers size e&period;g&period; NOTE(my&lowbar;vec, nf&colon;&colon;index&lowbar;size&lt;uint16&lowbar;t&gt;) std&colon;&colon;vector&lt;int&gt; my&lowbar;vec&semi;
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

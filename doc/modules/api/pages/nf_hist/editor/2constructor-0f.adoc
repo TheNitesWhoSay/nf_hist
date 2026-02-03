@@ -1,0 +1,28 @@
+[#nf_hist-editor-2constructor-0f]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/editor.adoc[editor]::editor
+:relfileprefix: ../../
+:mrdocs:
+
+Construct from `Tracked`
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+editor(Tracked* parent);
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *parent*
+| The object to construct from
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

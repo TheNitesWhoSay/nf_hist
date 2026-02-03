@@ -1,0 +1,130 @@
+[#nf_hist-tracked-0e]
+= xref:nf_hist.adoc[nf&lowbar;hist]::tracked
+:relfileprefix: ../
+:mrdocs:
+
+The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+class tracked;
+----
+
+== Member Functions
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked-0e/2constructor-0af.adoc[`tracked`]         [.small]#[constructor]#
+| Constructors
+| xref:nf_hist/tracked-0e/clear_history.adoc[`clear&lowbar;history`] 
+| 
+| xref:nf_hist/tracked-0e/create_action.adoc[`create&lowbar;action`] 
+| 
+| xref:nf_hist/tracked-0e/get_action_user_data.adoc[`get&lowbar;action&lowbar;user&lowbar;data`] 
+| 
+| xref:nf_hist/tracked-0e/get_cursor_index.adoc[`get&lowbar;cursor&lowbar;index`] 
+| One after the index of the last action which hasn&apos;t been undone
+| xref:nf_hist/tracked-0e/get_pending_action_index.adoc[`get&lowbar;pending&lowbar;action&lowbar;index`] 
+| The index the current action will have if it&apos;s submitted
+| xref:nf_hist/tracked-0e/init_data.adoc[`init&lowbar;data`] 
+| Initializes the stored data with the given input, this initialization is tracked of initTracked is true If there&apos;s an active action or any stored actions a logic&lowbar;error will be thrown
+| xref:nf_hist/tracked-0e/operator_call.adoc[`operator()`] 
+| 
+| xref:nf_hist/tracked-0e/operator_star.adoc[`operator&ast;`] 
+| 
+| xref:nf_hist/tracked-0e/operator_ptr.adoc[`operator&hyphen;&gt;`] 
+| 
+| xref:nf_hist/tracked-0e/previous_cursor_index.adoc[`previous&lowbar;cursor&lowbar;index`] 
+| One after the index of the most recent un&hyphen;elided action before the current cursor
+| xref:nf_hist/tracked-0e/print_change_history.adoc[`print&lowbar;change&lowbar;history`] 
+| 
+| xref:nf_hist/tracked-0e/print_event-0c.adoc[`print&lowbar;event`] 
+| 
+| xref:nf_hist/tracked-0e/record_init.adoc[`record&lowbar;init`] 
+| Creates an action recording the initialization of an object which has already occurred
+| xref:nf_hist/tracked-0e/redo_action.adoc[`redo&lowbar;action`] 
+| 
+| xref:nf_hist/tracked-0e/render_action.adoc[`render&lowbar;action`] 
+| Renders the bytewise data of an action into a user&hyphen;friendly representation
+| xref:nf_hist/tracked-0e/render_change_history.adoc[`render&lowbar;change&lowbar;history`] 
+| 
+| xref:nf_hist/tracked-0e/render_event.adoc[`render&lowbar;event`] 
+| 
+| xref:nf_hist/tracked-0e/total_actions.adoc[`total&lowbar;actions`] 
+| Includes undoable, redoable, elided, and pending actions
+| xref:nf_hist/tracked-0e/trim_history.adoc[`trim&lowbar;history`] 
+| Trims history so it starts at new&lowbar;first&lowbar;action&semi; if new&lowbar;first&lowbar;action is elided the trim starts at the next unelided action
+| xref:nf_hist/tracked-0e/trim_history_to_size.adoc[`trim&lowbar;history&lowbar;to&lowbar;size`] 
+| Trims the history such that size is less than or equal to max&lowbar;size
+| xref:nf_hist/tracked-0e/undo_action.adoc[`undo&lowbar;action`] 
+| 
+|===
+
+== Data Members
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked-0e/read.adoc[`read`] 
+| A read only version of the user data
+| xref:nf_hist/tracked-0e/view.adoc[`view`] 
+| Used to view selections data (and potentially other info associated with particular data paths)
+|===
+
+== Static Data Members
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/tracked-0e/no_action.adoc[`no&lowbar;action`] 
+|===
+
+== Protected Types
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/tracked-0e/pather.adoc[`pather`] 
+|===
+
+== Protected Member Functions
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/tracked-0e/replace_pending_action_user_data.adoc[`replace&lowbar;pending&lowbar;action&lowbar;user&lowbar;data`] 
+|===
+
+== Protected Static Data Members
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked-0e/root.adoc[`root`] 
+| Represents the root of the data structure, used by client code to create paths
+|===
+
+== Template Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *Data*
+| your source data class, which is some regular struct&sol;class that has been reflected and which you want tracked to manage&sol;track changes to
+| *User*
+| the class you&apos;re defining when extending tracked, e&period;g&period; class my&lowbar;thing &colon; tracked&lt;my&lowbar;data, my&lowbar;thing&gt; &lcub; &period;&period;&period; &rcub;&semi;
+| *User&lowbar;data*
+| (optional) any user&hyphen;defined data you wish to be associated with every action in the change history
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

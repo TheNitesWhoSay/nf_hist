@@ -1,0 +1,23 @@
+[#nf_hist-tracked-0e-get_cursor_index]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::get&lowbar;cursor&lowbar;index
+:relfileprefix: ../../
+:mrdocs:
+
+One after the index of the last action which hasn&apos;t been undone
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+get&lowbar;cursor&lowbar;index();
+----
+
+== Return Value
+
+Index one after the last action which hasn&apos;t been undone
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

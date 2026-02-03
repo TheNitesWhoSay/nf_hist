@@ -1,0 +1,23 @@
+[#nf_hist-tracked-0e-get_pending_action_index]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::get&lowbar;pending&lowbar;action&lowbar;index
+:relfileprefix: ../../
+:mrdocs:
+
+The index the current action will have if it&apos;s submitted
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+get&lowbar;pending&lowbar;action&lowbar;index();
+----
+
+== Return Value
+
+Index the current action will have if it&apos;s submitted
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

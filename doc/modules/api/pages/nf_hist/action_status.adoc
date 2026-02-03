@@ -1,0 +1,32 @@
+[#nf_hist-action_status]
+= xref:nf_hist.adoc[nf&lowbar;hist]::action&lowbar;status
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+enum class action&lowbar;status : int;
+----
+
+== Members
+
+[cols=2]
+|===
+| Name
+| Description
+| `unknown` 
+| the status rendered&lowbar;actions get initialized to, this is expected to be updated by the renderer
+| `undoable` 
+| an action exists prior to the current action cursor and can be undone
+| `elided&lowbar;redo` 
+| an action was redoable but has since been elided from the main history branch and can no longer be undone&sol;redone
+| `redoable` 
+| an action exists after the current action cursor and can be redone
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

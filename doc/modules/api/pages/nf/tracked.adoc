@@ -1,0 +1,25 @@
+[#nf-tracked]
+= xref:nf.adoc[nf]::tracked
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::tracked;
+----
+
+== Introduced Symbols
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked-0d.adoc[nf&lowbar;hist::tracked]
+| The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,36 @@
+[#nf_hist-tracked-0e-render_action]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::render&lowbar;action
+:relfileprefix: ../../
+:mrdocs:
+
+Renders the bytewise data of an action into a user&hyphen;friendly representation
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+void
+render&lowbar;action(
+    std::size&lowbar;t action&lowbar;index,
+    xref:nf_hist/rendered_action.adoc[rendered&lowbar;action&lt;User&lowbar;data&gt;]& action,
+    bool include&lowbar;events = false) const;
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *action&lowbar;index*
+| the index of the action you wish to render
+| *action*
+| the struct to fill with the data of the action
+| *include&lowbar;events*
+| (optional) whether to include event details with this action
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

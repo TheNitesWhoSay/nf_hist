@@ -1,0 +1,23 @@
+[#nf_hist-tracked-0e-total_actions]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::total&lowbar;actions
+:relfileprefix: ../../
+:mrdocs:
+
+Includes undoable, redoable, elided, and pending actions
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+total&lowbar;actions();
+----
+
+== Return Value
+
+The total count of actions, including undoable, redoable, elided, and pending actions
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

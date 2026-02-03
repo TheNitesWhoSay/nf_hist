@@ -1,0 +1,33 @@
+[#nf_hist-simple_tracked-026-2constructor-0b]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/simple_tracked-026.adoc[simple&lowbar;tracked]::simple&lowbar;tracked
+:relfileprefix: ../../
+:mrdocs:
+
+Constructors
+
+== Synopses
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+Construct from `bool`
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/simple_tracked-026/2constructor-03.adoc[simple&lowbar;tracked](bool track&lowbar;init = false);
+----
+
+[.small]#xref:nf_hist/simple_tracked-026/2constructor-03.adoc[_» more&period;&period;&period;_]#
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/simple_tracked-026/2constructor-08.adoc[simple&lowbar;tracked](
+    Data&& data,
+    bool track&lowbar;init = false);
+----
+
+[.small]#xref:nf_hist/simple_tracked-026/2constructor-08.adoc[_» more&period;&period;&period;_]#
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

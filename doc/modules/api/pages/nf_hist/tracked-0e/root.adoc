@@ -1,0 +1,19 @@
+[#nf_hist-tracked-0e-root]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::root
+:relfileprefix: ../../
+:mrdocs:
+
+Represents the root of the data structure, used by client code to create paths
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+inline static
+xref:nf_hist/tracked-0e/pather.adoc[pather] root = &lcub;&rcub;;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

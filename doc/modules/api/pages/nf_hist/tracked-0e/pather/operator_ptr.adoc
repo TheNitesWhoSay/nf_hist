@@ -1,0 +1,18 @@
+[#nf_hist-tracked-0e-pather-operator_ptr]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::xref:nf_hist/tracked-0e/pather.adoc[pather]::operator&hyphen;&gt;
+:relfileprefix: ../../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+constexpr
+xref:nf_hist/tracked-0e.adoc[mod&lowbar;root&lowbar;type]*
+operator&hyphen;&gt;() noexcept;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,77 @@
+[#nf_hist-tracked_element]
+= xref:nf_hist.adoc[nf&lowbar;hist]::tracked&lowbar;element
+:relfileprefix: ../
+:mrdocs:
+
+Extended to provide mutable&sol;returnable tracked sub&hyphen;elements from your source data
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;
+    typename T,
+    typename Path&lowbar;to&lowbar;elem,
+    typename Editor&lowbar;type = Path&lowbar;to&lowbar;elem::editor&lowbar;type,
+    typename Read&lowbar;edit&lowbar;pair = decltype(std&colon;&colon;declval&lt;typename Path&lowbar;to&lowbar;elem&colon;&colon;editor&lowbar;type&gt;()&period;edit&lowbar;from&lowbar;path(Path&lowbar;to&lowbar;elem&lcub;&rcub;))&gt;
+class tracked&lowbar;element
+    : public Read&lowbar;edit&lowbar;pair
+----
+
+== Base Classes
+
+[cols=2]
+|===
+| Name
+| Description
+| `Read&lowbar;edit&lowbar;pair`
+| 
+|===
+
+== Member Functions
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked_element/2constructor-0a.adoc[`tracked&lowbar;element`]         [.small]#[constructor]#
+| Move constructor
+| xref:nf_hist/tracked_element/2constructor-0c.adoc[`tracked&lowbar;element`]         [.small]#[constructor]#
+| 
+| xref:nf_hist/tracked_element/2constructor-02.adoc[`tracked&lowbar;element`]         [.small]#[constructor]#
+| 
+| xref:nf_hist/tracked_element/operator_call.adoc[`operator()`] 
+| 
+| xref:nf_hist/tracked_element/operator_ptr.adoc[`operator&hyphen;&gt;`] 
+| 
+|===
+
+== Data Members
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/tracked_element/action.adoc[`action`] 
+| xref:nf_hist/tracked_element/view.adoc[`view`] 
+|===
+
+== Template Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *T*
+| the type of the sub&hyphen;element from the source data
+| *Path&lowbar;to&lowbar;elem*
+| a path to the sub&hyphen;element from the source data
+| *Editor&lowbar;type*
+| (leave as default, evaluates to Path&lowbar;to&lowbar;elem&colon;&colon;editor&lowbar;type)
+| *Read&lowbar;edit&lowbar;pair*
+| (leave as default, evaluates to struct &lcub; const T &amp; read&semi; an&lowbar;editor &amp; edit&semi; &rcub;)
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

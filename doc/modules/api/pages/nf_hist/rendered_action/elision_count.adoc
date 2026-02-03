@@ -1,0 +1,16 @@
+[#nf_hist-rendered_action-elision_count]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/rendered_action.adoc[rendered&lowbar;action]::elision&lowbar;count
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t elision&lowbar;count = 0;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

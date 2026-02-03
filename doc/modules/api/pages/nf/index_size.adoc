@@ -1,0 +1,25 @@
+[#nf-index_size]
+= xref:nf.adoc[nf]::index&lowbar;size
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::index&lowbar;size;
+----
+
+== Introduced Symbols
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/index_size.adoc[nf&lowbar;hist::index&lowbar;size]
+| Optional annotation used to specify the index size type used in serialized history, specifying an index size smaller than std&colon;&colon;size&lowbar;t reduces history size, appropriate when there&apos;s a known limit to a given containers size e&period;g&period; NOTE(my&lowbar;vec, nf&colon;&colon;index&lowbar;size&lt;uint16&lowbar;t&gt;) std&colon;&colon;vector&lt;int&gt; my&lowbar;vec&semi;
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,23 @@
+[#nf-action_status]
+= xref:nf.adoc[nf]::action&lowbar;status
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::action&lowbar;status;
+----
+
+== Introduced Symbols
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/action_status.adoc[nf&lowbar;hist::action&lowbar;status]
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

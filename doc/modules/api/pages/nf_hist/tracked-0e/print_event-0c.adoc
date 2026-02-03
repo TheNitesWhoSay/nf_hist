@@ -1,0 +1,22 @@
+[#nf_hist-tracked-0e-print_event-0c]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::print&lowbar;event
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;
+    class U,
+    class Member = void&gt;
+void
+print&lowbar;event(
+    std::ostream& os,
+    std::size&lowbar;t& offset) const;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

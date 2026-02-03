@@ -1,0 +1,33 @@
+[#nf_hist-tracked-0e-2constructor-0af]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::tracked
+:relfileprefix: ../../
+:mrdocs:
+
+Constructors
+
+== Synopses
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+Construct from `User`
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/tracked-0e/2constructor-0a6.adoc[tracked](User& user);
+----
+
+[.small]#xref:nf_hist/tracked-0e/2constructor-0a6.adoc[_» more&period;&period;&period;_]#
+
+Construct from `User`
+
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+xref:nf_hist/tracked-0e/2constructor-07.adoc[tracked](User* user);
+----
+
+[.small]#xref:nf_hist/tracked-0e/2constructor-07.adoc[_» more&period;&period;&period;_]#
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

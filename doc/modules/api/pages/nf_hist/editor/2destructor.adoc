@@ -1,0 +1,18 @@
+[#nf_hist-editor-2destructor]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/editor.adoc[editor]::&#126;editor
+:relfileprefix: ../../
+:mrdocs:
+
+Destructor
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+&#126;editor();
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

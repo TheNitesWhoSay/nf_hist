@@ -1,0 +1,17 @@
+[#nf_hist-tracked-0e-redo_action]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::redo&lowbar;action
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+redo&lowbar;action();
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

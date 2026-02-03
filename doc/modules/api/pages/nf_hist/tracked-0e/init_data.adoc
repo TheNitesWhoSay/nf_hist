@@ -1,0 +1,30 @@
+[#nf_hist-tracked-0e-init_data]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::init&lowbar;data
+:relfileprefix: ../../
+:mrdocs:
+
+Initializes the stored data with the given input, this initialization is tracked of initTracked is true If there&apos;s an active action or any stored actions a logic&lowbar;error will be thrown
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;bool Init&lowbar;tracked = false&gt;
+void
+init&lowbar;data(auto&& data);
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *data*
+| The value to initialize the stored data to
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

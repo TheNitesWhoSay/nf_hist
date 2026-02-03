@@ -1,0 +1,28 @@
+[#nf_hist-editor-2constructor-03]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/editor.adoc[editor]::editor
+:relfileprefix: ../../
+:mrdocs:
+
+Move constructor
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+editor(xref:nf_hist/editor.adoc[editor]&& other) noexcept;
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *other*
+| The object to move construct from
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

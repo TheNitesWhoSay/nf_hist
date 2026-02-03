@@ -1,0 +1,25 @@
+[#nf-tracked_element]
+= xref:nf.adoc[nf]::tracked&lowbar;element
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::tracked&lowbar;element;
+----
+
+== Introduced Symbols
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/tracked_element.adoc[nf&lowbar;hist::tracked&lowbar;element]
+| Extended to provide mutable&sol;returnable tracked sub&hyphen;elements from your source data
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,23 @@
+[#nf_hist-tracked-0e-previous_cursor_index]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::previous&lowbar;cursor&lowbar;index
+:relfileprefix: ../../
+:mrdocs:
+
+One after the index of the most recent un&hyphen;elided action before the current cursor
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+std::size&lowbar;t
+previous&lowbar;cursor&lowbar;index();
+----
+
+== Return Value
+
+Index one after the most recent un&hyphen;elided action before the current cursor
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

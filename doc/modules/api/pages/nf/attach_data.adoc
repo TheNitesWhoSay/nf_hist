@@ -1,0 +1,25 @@
+[#nf-attach_data]
+= xref:nf.adoc[nf]::attach&lowbar;data
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::attach&lowbar;data;
+----
+
+== Introduced Symbols
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/attach_data.adoc[nf&lowbar;hist::attach&lowbar;data]
+| Optional annotation specifying that a collection of the supplied type should be maintained as a parallel array to the type annotated e&period;g&period; NOTE(my&lowbar;units, nf&colon;&colon;attach&lowbar;data&lt;my&lowbar;graphics&gt;) std&colon;&colon;vector&lt;my&lowbar;unit&gt; my&lowbar;units&semi;
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

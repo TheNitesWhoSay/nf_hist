@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tagfile>
+<compound kind="namespace">
+  <name>nf</name>
+  <filename>nf.adoc</filename>
+  <class kind="class">nf::action_status</class>
+  <class kind="class">nf::attach_data</class>
+  <class kind="class">nf::editor</class>
+  <class kind="class">nf::index_size</class>
+  <class kind="class">nf::make_path</class>
+  <class kind="class">nf::make_tracked</class>
+  <class kind="class">nf::rendered_action</class>
+  <class kind="class">nf::simple_tracked</class>
+  <class kind="class">nf::tracked</class>
+  <class kind="class">nf::tracked_element</class>
+</compound>
+<compound kind="class">
+  <name>nf::action_status</name>
+  <filename>nf/action_status.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::attach_data</name>
+  <filename>nf/attach_data.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::editor</name>
+  <filename>nf/editor.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::index_size</name>
+  <filename>nf/index_size.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::make_path</name>
+  <filename>nf/make_path.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::make_tracked</name>
+  <filename>nf/make_tracked.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::rendered_action</name>
+  <filename>nf/rendered_action.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::simple_tracked</name>
+  <filename>nf/simple_tracked.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::tracked</name>
+  <filename>nf/tracked.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf::tracked_element</name>
+  <filename>nf/tracked_element.adoc</filename>
+</compound>
+<compound kind="namespace">
+  <name>nf_hist</name>
+  <filename>nf_hist.adoc</filename>
+  <class kind="class">nf_hist::make_path</class>
+  <class kind="class">nf_hist::editor</class>
+  <class kind="class">nf_hist::rendered_action</class>
+  <class kind="class">nf_hist::simple_tracked</class>
+  <class kind="class">nf_hist::simple_tracked</class>
+  <class kind="class">nf_hist::tracked</class>
+  <class kind="class">nf_hist::tracked</class>
+  <class kind="class">nf_hist::tracked_element</class>
+  <class kind="class">nf_hist::action_status</class>
+  <class kind="class">nf_hist::attach_data</class>
+  <class kind="class">nf_hist::index_size</class>
+  <member kind="function">
+    <type>auto</type>
+    <name>make_tracked</name>
+    <anchorfile>nf_hist/make_tracked.adoc</anchorfile>
+    <anchor/>
+    <arglist>(Data&amp;&amp; data)</arglist>
+  </member>
+</compound>
+<compound kind="class">
+  <name>nf_hist::make_path</name>
+  <filename>nf_hist/make_path.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::editor</name>
+  <filename>nf_hist/editor.adoc</filename>
+  <member kind="function">
+    <type>void</type>
+    <name>~editor</name>
+    <anchorfile>nf_hist/editor/2destructor.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>auto</type>
+    <name>edit_from_path</name>
+    <anchorfile>nf_hist/editor/edit_from_path.adoc</anchorfile>
+    <anchor/>
+    <arglist>(path_tagged_keys&lt;Keys, type_tags&lt;Pathway...&gt;, editor&lt;Tracked&gt;&gt; path)</arglist>
+  </member>
+  <member kind="function">
+    <type>Tracked::mod_root_type&amp;</type>
+    <name>operator*</name>
+    <anchorfile>nf_hist/editor/operator_star.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>Tracked::mod_root_type*</type>
+    <name>operator-&gt;</name>
+    <anchorfile>nf_hist/editor/operator_ptr.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+</compound>
+<compound kind="class">
+  <name>nf_hist::rendered_action</name>
+  <filename>nf_hist/rendered_action.adoc</filename>
+  <member kind="function">
+    <type>bool</type>
+    <name>is_elided</name>
+    <anchorfile>nf_hist/rendered_action/is_elided.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>bool</type>
+    <name>is_elision_marker</name>
+    <anchorfile>nf_hist/rendered_action/is_elision_marker.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>bool</type>
+    <name>is_redoable</name>
+    <anchorfile>nf_hist/rendered_action/is_redoable.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>bool</type>
+    <name>is_sel_change_action</name>
+    <anchorfile>nf_hist/rendered_action/is_sel_change_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>bool</type>
+    <name>is_undoable</name>
+    <anchorfile>nf_hist/rendered_action/is_undoable.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+</compound>
+<compound kind="class">
+  <name>nf_hist::simple_tracked</name>
+  <filename>nf_hist/simple_tracked-026.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::simple_tracked</name>
+  <filename>nf_hist/simple_tracked-02b.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::tracked</name>
+  <filename>nf_hist/tracked-0e.adoc</filename>
+  <member kind="function">
+    <type>void</type>
+    <name>clear_history</name>
+    <anchorfile>nf_hist/tracked-0e/clear_history.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>auto</type>
+    <name>create_action</name>
+    <anchorfile>nf_hist/tracked-0e/create_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>(User_data user_data)</arglist>
+  </member>
+  <member kind="function">
+    <type>const User_data&amp;</type>
+    <name>get_action_user_data</name>
+    <anchorfile>nf_hist/tracked-0e/get_action_user_data.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::size_t action_index)</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>get_cursor_index</name>
+    <anchorfile>nf_hist/tracked-0e/get_cursor_index.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>get_pending_action_index</name>
+    <anchorfile>nf_hist/tracked-0e/get_pending_action_index.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>init_data</name>
+    <anchorfile>nf_hist/tracked-0e/init_data.adoc</anchorfile>
+    <anchor/>
+    <arglist>(auto&amp;&amp; data)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto</type>
+    <name>operator()</name>
+    <anchorfile>nf_hist/tracked-0e/operator_call.adoc</anchorfile>
+    <anchor/>
+    <arglist>(User_data user_data)</arglist>
+  </member>
+  <member kind="function">
+    <type>const Data&amp;</type>
+    <name>operator*</name>
+    <anchorfile>nf_hist/tracked-0e/operator_star.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>const Data*</type>
+    <name>operator-&gt;</name>
+    <anchorfile>nf_hist/tracked-0e/operator_ptr.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>previous_cursor_index</name>
+    <anchorfile>nf_hist/tracked-0e/previous_cursor_index.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>print_change_history</name>
+    <anchorfile>nf_hist/tracked-0e/print_change_history.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>print_event</name>
+    <anchorfile>nf_hist/tracked-0e/print_event-0c.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>record_init</name>
+    <anchorfile>nf_hist/tracked-0e/record_init.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>redo_action</name>
+    <anchorfile>nf_hist/tracked-0e/redo_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>render_action</name>
+    <anchorfile>nf_hist/tracked-0e/render_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::size_t action_index, rendered_action&lt;User_data&gt;&amp; action, bool include_events)</arglist>
+  </member>
+  <member kind="function">
+    <type>std::vector&lt;rendered_action&lt;User_data&gt;&gt;</type>
+    <name>render_change_history</name>
+    <anchorfile>nf_hist/tracked-0e/render_change_history.adoc</anchorfile>
+    <anchor/>
+    <arglist>(bool include_events)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>render_event</name>
+    <anchorfile>nf_hist/tracked-0e/render_event.adoc</anchorfile>
+    <anchor/>
+    <arglist>(data_change_event&amp; data_change_event, std::size_t&amp; offset)</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>total_actions</name>
+    <anchorfile>nf_hist/tracked-0e/total_actions.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>trim_history</name>
+    <anchorfile>nf_hist/tracked-0e/trim_history.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::size_t new_first_action)</arglist>
+  </member>
+  <member kind="function">
+    <type>uint64_t</type>
+    <name>trim_history_to_size</name>
+    <anchorfile>nf_hist/tracked-0e/trim_history_to_size.adoc</anchorfile>
+    <anchor/>
+    <arglist>(uint64_t max_size)</arglist>
+  </member>
+  <member kind="function">
+    <type>std::size_t</type>
+    <name>undo_action</name>
+    <anchorfile>nf_hist/tracked-0e/undo_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>replace_pending_action_user_data</name>
+    <anchorfile>nf_hist/tracked-0e/replace_pending_action_user_data.adoc</anchorfile>
+    <anchor/>
+    <arglist>(User_data user_data)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>elide_redos</name>
+    <anchorfile>nf_hist/tracked-0e/elide_redos.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>print_event</name>
+    <anchorfile>nf_hist/tracked-0e/print_event-05.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset, uint8_t operation, std::index_sequence&lt;Is...&gt;)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>print_event_op</name>
+    <anchorfile>nf_hist/tracked-0e/print_event_op.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset, op operation)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto&amp;</type>
+    <name>put</name>
+    <anchorfile>nf_hist/tracked-0e/put.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, auto&amp;&amp; value)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto&amp;</type>
+    <name>put_index</name>
+    <anchorfile>nf_hist/tracked-0e/put_index.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto&amp;</type>
+    <name>put_indexes</name>
+    <anchorfile>nf_hist/tracked-0e/put_indexes.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset, std::size_t size)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto&amp;</type>
+    <name>put_value</name>
+    <anchorfile>nf_hist/tracked-0e/put_value.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto&amp;</type>
+    <name>put_values</name>
+    <anchorfile>nf_hist/tracked-0e/put_values.adoc</anchorfile>
+    <anchor/>
+    <arglist>(std::ostream&amp; os, std::size_t&amp; offset, std::size_t size)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>submit_action</name>
+    <anchorfile>nf_hist/tracked-0e/submit_action.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+</compound>
+<compound kind="class">
+  <name>nf_hist::tracked</name>
+  <filename>nf_hist/tracked-0d.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::tracked_element</name>
+  <filename>nf_hist/tracked_element.adoc</filename>
+  <member kind="function">
+    <type>void</type>
+    <name>tracked_element</name>
+    <anchorfile>nf_hist/tracked_element/2constructor-0a.adoc</anchorfile>
+    <anchor/>
+    <arglist>(tracked_element&amp;&amp; other)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>tracked_element</name>
+    <anchorfile>nf_hist/tracked_element/2constructor-0c.adoc</anchorfile>
+    <anchor/>
+    <arglist>(tracked_type* tracked, keys_type keys)</arglist>
+  </member>
+  <member kind="function">
+    <type>void</type>
+    <name>tracked_element</name>
+    <anchorfile>nf_hist/tracked_element/2constructor-02.adoc</anchorfile>
+    <anchor/>
+    <arglist>(tracked_element&lt;Ts...&gt;* parent_element, keys_type keys)</arglist>
+  </member>
+  <member kind="function">
+    <type>auto</type>
+    <name>operator()</name>
+    <anchorfile>nf_hist/tracked_element/operator_call.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+  <member kind="function">
+    <type>const T*</type>
+    <name>operator-&gt;</name>
+    <anchorfile>nf_hist/tracked_element/operator_ptr.adoc</anchorfile>
+    <anchor/>
+    <arglist>()</arglist>
+  </member>
+</compound>
+<compound kind="class">
+  <name>nf_hist::action_status</name>
+  <filename>nf_hist/action_status.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::attach_data</name>
+  <filename>nf_hist/attach_data.adoc</filename>
+</compound>
+<compound kind="class">
+  <name>nf_hist::index_size</name>
+  <filename>nf_hist/index_size.adoc</filename>
+</compound>
+</tagfile>

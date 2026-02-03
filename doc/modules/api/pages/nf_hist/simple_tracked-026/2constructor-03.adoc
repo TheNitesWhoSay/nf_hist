@@ -1,0 +1,28 @@
+[#nf_hist-simple_tracked-026-2constructor-03]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/simple_tracked-026.adoc[simple&lowbar;tracked]::simple&lowbar;tracked
+:relfileprefix: ../../
+:mrdocs:
+
+Construct from `bool`
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+simple&lowbar;tracked(bool track&lowbar;init = false);
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *track&lowbar;init*
+| The value to construct from
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

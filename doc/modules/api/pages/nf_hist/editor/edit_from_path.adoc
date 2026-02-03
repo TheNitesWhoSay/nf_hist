@@ -1,0 +1,20 @@
+[#nf_hist-editor-edit_from_path]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/editor.adoc[editor]::edit&lowbar;from&lowbar;path
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;
+    class Keys,
+    class&period;&period;&period; Pathway&gt;
+auto
+edit&lowbar;from&lowbar;path(path&lowbar;tagged&lowbar;keys&lt;Keys, type&lowbar;tags&lt;Pathway&period;&period;&period;&gt;, editor&lt;Tracked&gt;&gt; path);
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

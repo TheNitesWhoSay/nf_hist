@@ -1,0 +1,33 @@
+[#nf_hist-tracked-0e-trim_history_to_size]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::trim&lowbar;history&lowbar;to&lowbar;size
+:relfileprefix: ../../
+:mrdocs:
+
+Trims the history such that size is less than or equal to max&lowbar;size
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+uint64&lowbar;t
+trim&lowbar;history&lowbar;to&lowbar;size(uint64&lowbar;t max&lowbar;size);
+----
+
+== Return Value
+
+the new size
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *max&lowbar;size*
+| the maximum size for the history to have after trimming (actions must be kept whole so the new byte count will likely be less)
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,35 @@
+[#nf_hist-editor]
+= xref:nf_hist.adoc[nf&lowbar;hist]::editor
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;class Tracked&gt;
+class editor;
+----
+
+== Member Functions
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/editor/2constructor-05.adoc[`editor`]         [.small]#[constructor]#
+| Constructors
+| xref:nf_hist/editor/2destructor.adoc[`&#126;editor`] [.small]#[destructor]#
+| Destructor
+| xref:nf_hist/editor/edit_from_path.adoc[`edit&lowbar;from&lowbar;path`] 
+| 
+| xref:nf_hist/editor/operator_star.adoc[`operator&ast;`] 
+| 
+| xref:nf_hist/editor/operator_ptr.adoc[`operator&hyphen;&gt;`] 
+| 
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

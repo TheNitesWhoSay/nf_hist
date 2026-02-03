@@ -1,0 +1,25 @@
+[#nf_hist-tracked-0e-pather]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::pather
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+struct pather;
+----
+
+== Member Functions
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/tracked-0e/pather/operator_star.adoc[`operator&ast;`] 
+| xref:nf_hist/tracked-0e/pather/operator_ptr.adoc[`operator&hyphen;&gt;`] 
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

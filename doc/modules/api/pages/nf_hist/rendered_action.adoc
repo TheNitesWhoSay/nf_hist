@@ -1,0 +1,53 @@
+[#nf_hist-rendered_action]
+= xref:nf_hist.adoc[nf&lowbar;hist]::rendered&lowbar;action
+:relfileprefix: ../
+:mrdocs:
+
+A reasonably user&hyphen;friendly rendering of an action
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;class Action&lowbar;user&lowbar;data = no&lowbar;user&lowbar;data&gt;
+struct rendered&lowbar;action;
+----
+
+== Member Functions
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/rendered_action/is_elided.adoc[`is&lowbar;elided`] 
+| xref:nf_hist/rendered_action/is_elision_marker.adoc[`is&lowbar;elision&lowbar;marker`] 
+| xref:nf_hist/rendered_action/is_redoable.adoc[`is&lowbar;redoable`] 
+| xref:nf_hist/rendered_action/is_sel_change_action.adoc[`is&lowbar;sel&lowbar;change&lowbar;action`] 
+| xref:nf_hist/rendered_action/is_undoable.adoc[`is&lowbar;undoable`] 
+|===
+
+== Data Members
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/rendered_action/byte_count.adoc[`byte&lowbar;count`] 
+| xref:nf_hist/rendered_action/change_events.adoc[`change&lowbar;events`] 
+| xref:nf_hist/rendered_action/elision_count.adoc[`elision&lowbar;count`] 
+| xref:nf_hist/rendered_action/status.adoc[`status`] 
+| xref:nf_hist/rendered_action/user_data.adoc[`user&lowbar;data`] 
+|===
+
+== Template Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *Action&lowbar;user&lowbar;data*
+| the type of the user&hyphen;defined data associated with all actions in a given tracked type (may be nf&lowbar;hist&colon;&colon;no&lowbar;user&lowbar;data)
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

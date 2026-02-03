@@ -1,0 +1,49 @@
+[#nf_hist-tracked-0d]
+= xref:nf_hist.adoc[nf&lowbar;hist]::tracked
+:relfileprefix: ../
+:mrdocs:
+
+The parent class for your tracked type, stores your source data class, provides const ref access to it, and capabilities to make tracked changes to all members&sol;sub&hyphen;elements, as well as the ability to undo&sol;redo, traverse and manage history
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;
+    class Data,
+    class User,
+    class User&lowbar;data = no&lowbar;user&lowbar;data&gt;
+requires RareTs&colon;&colon;is&lowbar;macro&lowbar;reflected&lowbar;v&lt;Data&gt; &amp;&amp; std&colon;&colon;is&lowbar;object&lowbar;v&lt;User&gt;
+class tracked;
+----
+
+== Derived Classes
+
+[cols=2]
+|===
+| Name
+| Description
+| xref:nf_hist/simple_tracked-026.adoc[`simple&lowbar;tracked`]
+| 
+| xref:nf_hist/simple_tracked-02b.adoc[`simple&lowbar;tracked`]
+| 
+|===
+
+== Template Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *Data*
+| your source data class, which is some regular struct&sol;class that has been reflected and which you want tracked to manage&sol;track changes to
+| *User*
+| the class you&apos;re defining when extending tracked, e&period;g&period; class my&lowbar;thing &colon; tracked&lt;my&lowbar;data, my&lowbar;thing&gt; &lcub; &period;&period;&period; &rcub;&semi;
+| *User&lowbar;data*
+| (optional) any user&hyphen;defined data you wish to be associated with every action in the change history
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

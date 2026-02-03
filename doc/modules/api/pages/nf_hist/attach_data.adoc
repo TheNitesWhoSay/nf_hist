@@ -1,0 +1,29 @@
+[#nf_hist-attach_data]
+= xref:nf_hist.adoc[nf&lowbar;hist]::attach&lowbar;data
+:relfileprefix: ../
+:mrdocs:
+
+Optional annotation specifying that a collection of the supplied type should be maintained as a parallel array to the type annotated e&period;g&period; NOTE(my&lowbar;units, nf&colon;&colon;attach&lowbar;data&lt;my&lowbar;graphics&gt;) std&colon;&colon;vector&lt;my&lowbar;unit&gt; my&lowbar;units&semi;
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+template&lt;typename Attached&lowbar;type&gt;
+inline constexpr attach&lowbar;data&lowbar;type&lt;Attached&lowbar;type&gt; attach&lowbar;data;
+----
+
+== Template Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *Attached&lowbar;type*
+| the type of the elements to use in the parallel array
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

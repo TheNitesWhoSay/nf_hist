@@ -1,0 +1,28 @@
+[#nf_hist-tracked_element-2constructor-0a]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked_element.adoc[tracked&lowbar;element]::tracked&lowbar;element
+:relfileprefix: ../../
+:mrdocs:
+
+Move constructor
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+tracked&lowbar;element(xref:nf_hist/tracked_element.adoc[tracked&lowbar;element]&& other);
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *other*
+| The object to move construct from
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

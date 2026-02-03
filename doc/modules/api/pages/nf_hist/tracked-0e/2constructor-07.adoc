@@ -1,0 +1,28 @@
+[#nf_hist-tracked-0e-2constructor-07]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::tracked
+:relfileprefix: ../../
+:mrdocs:
+
+Construct from `User`
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+tracked(User* user);
+----
+
+== Parameters
+
+[cols=2]
+|===
+| Name
+| Description
+| *user*
+| The object to construct from
+|===
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

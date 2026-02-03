@@ -1,0 +1,23 @@
+[#nf-editor]
+= xref:nf.adoc[nf]::editor
+:relfileprefix: ../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+using nf&lowbar;hist::editor;
+----
+
+== Introduced Symbols
+
+[cols=1]
+|===
+| Name
+| xref:nf_hist/editor.adoc[nf&lowbar;hist::editor]
+|===
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

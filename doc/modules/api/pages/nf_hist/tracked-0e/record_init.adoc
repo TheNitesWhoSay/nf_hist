@@ -1,0 +1,19 @@
+[#nf_hist-tracked-0e-record_init]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/tracked-0e.adoc[tracked]::record&lowbar;init
+:relfileprefix: ../../
+:mrdocs:
+
+Creates an action recording the initialization of an object which has already occurred
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+void
+record&lowbar;init();
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#

@@ -1,0 +1,16 @@
+[#nf_hist-rendered_action-user_data]
+= xref:nf_hist.adoc[nf&lowbar;hist]::xref:nf_hist/rendered_action.adoc[rendered&lowbar;action]::user&lowbar;data
+:relfileprefix: ../../
+:mrdocs:
+
+== Synopsis
+
+Declared in `&lt;nf&sol;hist&period;h&gt;`
+
+[source,cpp,subs="verbatim,replacements,macros,-callouts"]
+----
+Action&lowbar;user&lowbar;data user&lowbar;data = &lcub;&rcub;;
+----
+
+
+[.small]#Created with https://www.mrdocs.com[MrDocs]#
