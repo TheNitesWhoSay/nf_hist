@@ -1,0 +1,1 @@
+https://github.com/TheNitesWhoSay/RareCpp/tree/master/include
